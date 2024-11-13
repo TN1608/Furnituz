@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style type="text/css">
+  @import
+  url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap')
+  ;
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  .main-wrapper {
+    min-height: 100vh;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    padding: 0 1rem;
+    margin: 0 auto;
+  }
+
+  .product-div {
+    margin: 1rem 0;
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #fff;
+    border-radius: 3px;
+    column-gap: 10px;
+  }
+
+  .product-div-left {
+    padding: 20px;
+  }
+
+  .product-div-right {
+    padding: 20px;
+  }
+
+  .img-container img {
+    width: 400px;
+    margin: 0 auto;
+  }
+
+  .hover-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  .hover-container div {
+    border: 2px solid rgba(252, 160, 175, 0.7);
+    padding: 1rem;
+    border-radius: 3px;
+    margin: 0 4px 8px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .active {
+    border-color: rgb(255, 145, 163) !important;
+  }
+
+  .hover-container div:hover {
+    border-color: rgb(255, 145, 163);
+  }
+
+  .hover-container div img {
+    width: 50px;
+    cursor: pointer;
+  }
+
+  .product-div-right span {
+    display: block;
+  }
+
+  .product-name {
+    font-size: 26px;
+    margin-bottom: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    opacity: 0.9;
+  }
+
+  .product-price {
+    font-weight: 700;
+    font-size: 24px;
+    opacity: 0.9;
+    font-weight: 500;
+  }
+
+  .product-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+  .product-rating span {
+    margin-right: 6px;
+  }
+
+  .product-description {
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-top: 22px;
+  }
+
+  .btn-groups {
+    margin-top: 22px;
+  }
+
+  .btn-groups a{
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: inherit;
+    text-transform: uppercase;
+    padding: 15px 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-groups a .fas {
+    margin-right: 8px;
+  }
+
+  .add-cart-btn {
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: #FF9F00;
+    border: 2px solid #FF9F00;
+    margin-right: 8px;
+  }
+
+  .add-cart-btn:hover {
+    background-color: #fff;
+    color: #FF9F00;
+  }
+
+  .buy-now-btn {
+    background-color: #000;
+    border: 2px solid #000;
+  }
+
+  .buy-now-btn:hover {
+    background-color: #fff;
+    color: #000;
+  }
+
+  @media screen and (max-width: 992px) {
+    .product-div {
+      grid-template-columns: 100%;
+    }
+    .product-div-right {
+      text-align: center;
+    }
+    .product-rating {
+      justify-content: center;
+    }
+    .product-description {
+      max-width: 400px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .btn-groups a {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  .description-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .table th, .table td {
+    text-align: center;
+    padding: 8px;
+  }
+
+  .img-description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 12px;
+  }
+
+  .img-text-group {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  .img-text-group img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: block;
+    object-fit: cover;
+  }
+
+  .img-text-group p {
+    margin-top: 10px;
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .img-banner {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .img-banner img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .img-banner p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+    color: #555;
+  }
+
+  .last-in4 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .in4-bv, .why-choose {
+    flex: 1;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: none;
+  }
+
+  .in4-bv h1, .why-choose h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #333;
+  }
+
+  .in4-bv p, .why-choose p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #555;
+  }
+
+  .in4-bv p:first-of-type, .why-choose p:first-of-type {
+    margin-top: 0;
+  }
+
+  .in4-bv p:last-of-type, .why-choose p:last-of-type {
+    margin-bottom: 0;
+  }
+</style>
+<div class="main-wrapper">
+  <div class="container">
+    <div th:if="${not #lists.isEmpty(product)}">
+      <div class="product-div">
+        <div class="product-div-left">
+          <div class="img-container">
+            <img alt="chair img" th:src="@{${product.anhsp}}">
+          </div>
+          <div class="hover-container">
+            <div th:each="detail : ${productDetails}">
+              <img alt="product detail image" th:src="@{${detail.anhchitiet}}">
+            </div>
+          </div>
+        </div>
+        <div class="product-div-right">
+          <span class="product-name" th:text="${product.tensp}"></span>
+          <span class="product-price" th:text="${product.gia}"></span>
+          <div class="product-rating">
+            <span><i class="fas fa-star"></i></span>
+            <span><i class="fas fa-star"></i></span>
+            <span><i class="fas fa-star"></i></span>
+            <span><i class="fas fa-star"></i></span>
+            <span><i class="fas fa-star-half-alt"></i></span>
+            <span>(350 Đánh Giá)</span>
+          </div>
+          <p class="product-description">
+            <p>Vật liệu: Gỗ sồi, mây đan mắt cáo, vải bố.</p>
+            <p>Kích thước: D46cm x R56cm x C83cm</p>
+            <p>Mô tả ngắn: <span th:text="${product.mota}"></span></p>
+          </p>
+          <div class="btn-groups">
+            <a type="button" class="add-cart-btn" th:href="@{/java4_asm/cart(yeucau='muasp', masp=${product.masp})}">
+              <i class="fas fa-shopping-cart"></i>Thêm Vào Giỏ Hàng
+            </a>
+            <a type="button" class="buy-now-btn">
+              <i class="fas fa-wallet"></i>Mua Ngay
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Add the following HTML to include the description table -->
+      <div class="description-container">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th colspan="2" class="text-center">Mô tả sản phẩm</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Vật liệu:</td>
+            <td>Gỗ sồi, mây đan mắt cáo, vải bố</td>
+          </tr>
+          <tr>
+            <td>Màu sắc:</td>
+            <td>Màu gỗ, mây tự nhiên</td>
+          </tr>
+          <tr>
+            <td>Chiều dài sản phẩm:</td>
+            <td>46 cm</td>
+          </tr>
+          <tr>
+            <td>Chiều rộng sản phẩm:</td>
+            <td>56 cm</td>
+          </tr>
+          <tr>
+            <td>Chiều cao sản phẩm:</td>
+            <td>83 cm</td>
+          </tr>
+          <tr>
+            <td>Sản xuất tại:</td>
+            <td>Việt Nam</td>
+          </tr>
+          <tr>
+            <td>Nhà sản xuất:</td>
+            <td>HAY Decor</td>
+          </tr>
+          <tr>
+            <td>Bảo hành:</td>
+            <td>12 tháng</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="description-img">
+        <div class="img-banner">
+          <img alt="" th:src="@{/img/chair/CINDY-1.jpg}">
+          <p>Nội thất mộc dần xuất hiện nhiều hơn trong không gian sống
+            hiện đại, ghế ăn CINDY do HAY Decor chế tác cũng là một lựa chọn
+            tối ưu đầy đủ các yếu tố thẩm mỹ – công năng – linh hoạt trong
+            nhiều diện tích mà bạn có thể cân nhắc lựa chọn.</p>
+        </div>
+        <h1>Ghế ăn CINDY - Lựa chọn linh hoạt cho không gian tối giản</h1>
+
+        <div class="img-description">
+          <div th:each="detail, count : ${productDetails}" th:if="${count < 3}">
+            <div class="img-text-group">
+              <img alt="product img" th:src="@{${detail.anhchitiet}}">
+              <p th:text="${detail.noidung}"></p>
+            </div>
+          </div>
+        </div>
+        <div class="last-in4">
+          <div class="in4-bv">
+            <h1>Bảo quản và sử dụng:</h1>
+            <p>- Lau chùi thường xuyên bằng máy hút bụi hoặc khăn mềm
+              khô.</p>
+            <p>- Vệ sinh lớp vải bọc định kỳ 3-4 tháng lần để vật dụng được
+              sạch hơn.</p>
+            <p>- Không dùng các chất tẩy rửa quá mạnh có thể ảnh hưởng
+              đến màu sắc và độ bền của ghế.</p>
+            <p>- Tránh đặt ghế ở nơi có ánh nắng trực tiếp hoặc độ ẩm cao
+              gây giảm tuổi thọ sản phẩm.</p>
+            <p>- Đặt xa nguồn điện hoặc nguồn nhiệt từ 10-30cm để hạn chế
+              cháy nổ.</p>
+            <p>- Không dùng vật sắc nhọn tiếp xúc trực tiếp với mặt ghế.</p>
+            <p>- Sử dụng khử mùi tạo sự thoải mái và dễ chịu hơn khi
+              ngồi.</p>
+            <p>- Sử dụng nước sơn chuyên dụng đánh bóng bề mặt để giữ màu
+              sắc và bảo vệ gỗ lâu dài hơn (thời gian 6 tháng hoặc 1 năm/ lần
+              tùy vào điều kiện sử dụng).</p>
+          </div>
+          <div class="why-choose">
+            <h1>Vì sao nên chọn chúng tôi?</h1>
+            <p>- Lau chùi thường xuyên bằng máy hút bụi hoặc khăn mềm
+              khô.</p>
+            <p>- Giao hàng nhanh chóng.</p>
+            <p>- Miễn phí giao hàng tận nơi tại khu vực TP.HCM.</p>
+            <p>- Sản phẩm nội thất được bảo hành lên đến 12 tháng.</p>
+            <p>- Nội thất may đo có thể thay đổi vật liệu, kích thước,
+              màu sắc theo nhu cầu riêng.</p>
+            <p>- Sản phẩm được sản xuất trực tiếp tại xưởng HAY, quản lý
+              chất lượng chặt chẽ từng khâu sản xuất.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div th:if="${#lists.isEmpty(product)}">
+      <p class="text-center">Sản phẩm không tồn tại</p>
+    </div>
+  </div>
+</div>
+<script>
+
+  const allHoverImages = document.querySelectorAll('.hover-container div img');
+  const imgContainer = document.querySelector('.img-container');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    allHoverImages[0].parentElement.classList.add('active');
+  });
+
+  allHoverImages.forEach((image) => {
+    image.addEventListener('click', () => {
+      imgContainer.querySelector('img').src = image.src;
+      resetActiveImg();
+      image.parentElement.classList.add('active');
+    });
+  });
+
+  function resetActiveImg() {
+    allHoverImages.forEach((img) => {
+      img.parentElement.classList.remove('active');
+    });
+  }
+
+</script>
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

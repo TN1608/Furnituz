@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    /* Import Google font - Poppins */
+    @import
+    url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap')
+    ;
+
+    * {
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: #f1f1f1 !important;
+    }
+
+    body .container {
+        max-width: 1100px;
+    }
+
+    #filterable-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    #filterable-cards .card {
+        flex: 1 1 calc(33% - 1rem);
+        max-width: 25rem;
+        border: 2px solid transparent;
+    }
+
+    #filterable-cards .card img {
+        height: 20rem;
+        object-fit: cover;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    #filterable-cards .card:hover img {
+        transform: scale(1.05);
+        opacity: 0.7;
+    }
+
+    #filterable-cards .card-body {
+        text-align: center;
+    }
+
+    #filterable-cards .card-body a {
+        color: black;
+        text-decoration: none;
+    }
+
+    @media ( max-width : 992px) {
+        #filterable-cards .card {
+            flex: 1 1 calc(50% - 1rem);
+        }
+    }
+
+    @media ( max-width : 600px) {
+        #filterable-cards .card {
+            flex: 1 1 100%;
+        }
+    }
+</style>
+<div class="d-flex justify-content-end align-items-center mb-2">
+    <div class="container dropdown text-end">
+        <button class="btn dropdown-toggle softbtn" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">Sắp xếp sản
+            phẩm</button>
+        <ul class="dropdown-menu" style="">
+            <li><a class="dropdown-item" href="#">Giá : Cao &gt; Thấp</a></li>
+            <li><a class="dropdown-item" href="#">Giá : Thấp &gt; Cao</a></li>
+            <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+        </ul>
+    </div>
+</div>
+<div class="container" action="/java4_asm/danh-muc-san-pham/*">
+    <div class="row px-2 mt-4 gap-3" id="filterable-cards">
+<div th:if="${not #lists.isEmpty(products)}">
+    <h3 th:text="${madmtitle}"></h3>
+    <div th:each="product : ${products}" class="card p-0" data-name="nature">
+        <img alt="product-img" th:src="@{${product.anhsp}}" class="w-100">
+        <div class="card-body">
+            <a th:href="@{/product/{id}(id=${product.masp})}" th:text="${product.tensp}"></a>
+            <p class="card-text" th:text="${product.gia}"></p>
+        </div>
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(products)}" class="alert alert-warning" role="alert">
+    Chưa có sản phẩm nào
+</div>    </div>
+</div>
+
+<script>
+    document.querySelectorAll('#filterable-cards .card img').forEach(
+        function(img) {
+            img.addEventListener('mouseenter', function() {
+                let hoverImg = img.getAttribute('data-hover');
+                if (hoverImg) {
+                    img.setAttribute('data-src', img.src);
+                    img.src = hoverImg; // Thay đổi sang ảnh khi di chuột vào
+                }
+            });
+            img.addEventListener('mouseleave', function() {
+                let originalImg = img.getAttribute('data-src');
+                if (originalImg) {
+                    img.src = originalImg; // Khôi phục lại ảnh gốc
+                }
+            });
+        });
+</script>
+</body>
+</html>

@@ -7,6 +7,431 @@
     <title>Home</title>
 </head>
 <body>
-
+<style>
+    .content .carousel-item .img-fluid {
+        filter: brightness(80%);
+    }
+</style>
+<div class="content w-100">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./images/banner/1.jpg" class="d-block w-100 img-fluid" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./images/banner/2.jpg" class="d-block w-100 img-fluid" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="./images/banner/3.jpg" class="d-block w-100 img-fluid" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="container-fluid p-5">
+        <h4 class="text-center">Danh mục sản phẩm đang hot</h4>
+        <hr class="w-100">
+        <ul class="nav nav-underline justify-content-center fw-bold mb-5"
+            id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="chair-tab" data-bs-toggle="tab"
+                        data-bs-target="#chair-tab-pane" type="button" role="tab"
+                        aria-controls="chair-tab-pane" aria-selected="true">Ghế
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="table-tab" data-bs-toggle="tab"
+                        data-bs-target="#table-tab-pane" type="button" role="tab"
+                        aria-controls="table-tab-pane" aria-selected="false">Bàn
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="shelf-tab" data-bs-toggle="tab"
+                        data-bs-target="#shelf-tab-pane" type="button" role="tab"
+                        aria-controls="shelf-tab-pane" aria-selected="false">Kệ - Tủ
+                </button>
+            </li>
+        </ul>
+        <div class="d-flex justify-content-end align-items-center mb-2">
+            <div class="container dropdown text-end">
+                <button class="btn dropdown-toggle softbtn" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Sắp xếp sản phẩm
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Giá : Cao > Thấp</a></li>
+                    <li><a class="dropdown-item" href="#">Giá : Thấp > Cao</a></li>
+                    <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                </ul>
+            </div>
+            <input class="form-control w-25" type="search" placeholder="Tìm kiếm sản phẩm"
+                   aria-label="Search">
+        </div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="chair-tab-pane"
+                 role="tabpanel" aria-labelledby="chair-tab" tabindex="0">
+                <div class="container products">
+                    <div class="row">
+                            <div th:each="product : ${Sanpham}" class="col-md-3 mb-2" action="prodview" method="post">
+                                <div class="card">
+                                    <img th:src="${product.anhsp}" id="anhsp" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
+                                        <p class="card-text text-center fs-5" th:text="${product.gia}"></p>
+                                        <a href="#" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="table-tab-pane" role="tabpanel"
+                 aria-labelledby="table-tab" tabindex="0">
+                <div class="container products">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/LUCERA.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn Lucera</h5>
+                                    <p class="card-text text-center fs-5">420$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/LEONA.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn Leona</h5>
+                                    <p class="card-text text-center fs-5">340$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/SATARU.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn cafe Sakutara</h5>
+                                    <p class="card-text text-center fs-5">210$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/IKACHI.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn console IKACHI</h5>
+                                    <p class="card-text text-center fs-5">122$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/MUSHROOM.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn Mushroom</h5>
+                                    <p class="card-text text-center fs-5">220$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/LANDO.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn LANDO</h5>
+                                    <p class="card-text text-center fs-5">100$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/PINWHEEL.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn PINWHEEL</h5>
+                                    <p class="card-text text-center fs-5">200$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/table/FRAMMY.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Bàn ăn Frammy</h5>
+                                    <p class="card-text text-center fs-5">300$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="shelf-tab-pane" role="tabpanel"
+                 aria-labelledby="shelf-tab" tabindex="0">
+                <div class="container products">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/ANNIA.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Tủ ANNIA </h5>
+                                    <p class="card-text text-center fs-5">420$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/TENCHI.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Kệ TIVI TENCHI</h5>
+                                    <p class="card-text text-center fs-5">340$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/BUFFETPATO.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Tủ buffet PATO</h5>
+                                    <p class="card-text text-center fs-5">210$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/CLOUDER.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Tủ bếp clouder</h5>
+                                    <p class="card-text text-center fs-5">122$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/BLE.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Tủ chic BLUE</h5>
+                                    <p class="card-text text-center fs-5">220$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/TOHOOAK.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Tủ sồi TOHO</h5>
+                                    <p class="card-text text-center fs-5">100$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/COSETA.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Kệ COSETA</h5>
+                                    <p class="card-text text-center fs-5">200$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <div class="card">
+                                <img src="./images/shelf/MATTEO.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Kệ Tivi MATEO</h5>
+                                    <p class="card-text text-center fs-5">300$</p>
+                                    <a href="#"
+                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
+                                        tiết sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center mt-2 fw-bold">
+                    <li class="page-item disabled">
+                        <a class="page-link"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <h4 class="text-center fw-bold mt-5">DỊCH VỤ THIẾT KẾ THI CÔNG</h4>
+        <hr class="w-100">
+        <div class="row">
+            <div class="col-md-8">
+                <img src="./icon/1.jpg" class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-center mb-2">Giảm đến 50% chi phí thiết kế với dịch vụ thiết kế thi công nội thất trọn
+                    gói.</h6>
+                <img src="./icon/2.jpg" alt="..." class="img-fluid">
+            </div>
+        </div>
+        <section class="section2">
+            <h4 class="text-center fw-bold mt-5">CẢM HỨNG THIẾT KẾ</h4>
+            <hr class="w-100">
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <a class="btn card h-100">
+                        <img src="./images/camhung/1.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Thiết kế căn hộ Estella: Cảm hứng từ lối sống tối giản chất
+                                lượng</h5>
+                            <p class="card-text">Phong cách sống định hình nên không gian sống, điều này chính là phương
+                                châm mà HAY Decor đã áp dụng khi thực hiện thiết kế căn hộ Estella. Một lối sống tối
+                                giản
+                                hiện đại nhưng vẫn thể hiện rõ sự đủ đầy và sang trọng trong cách bố trí từng khu
+                                vực</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a class=" btn card h-100">
+                        <img src="./images/camhung/2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Parisian Chic: Căn hộ LUMIERE mang vẻ đẹp lãng mạn Pháp</h5>
+                            <p class="card-text">Căn hộ LUMIERE mang những trải nghiệm sống sang trọng một cách tinh tế
+                                của
+                                đất nước Pháp lãng mạn ngay tại Sài Gòn. Không sa hoa cầu kỳ nhưng có sức hút mạnh mẽ
+                                như
+                                một quý cô thanh lịch. HAY sẽ cùng bạn khám phá không gian căn hộ 2 phòng ngủ được thế
+                                kế
+                                theo phong cách Parisian Chic – Nội thất kiểu Pháp đương đại với vẻ đẹp vượt thời
+                                gian.</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a class="btn card h-100">
+                        <img src="./images/camhung/3.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Căn hộ LUMIERE: Thiết kế thi công trọn gói hay nội thất rời?</h5>
+                            <p class="card-text">Căn hộ LUMIERE là một dự án theo tiêu chuẩn sống xanh hiện đại, phù hợp
+                                với
+                                xu hướng phổ biến về sự đổi mới trong lối sống và gu thẩm mỹ của nhiều người. Vậy giữa
+                                thiết
+                                kế thi công nội thất trọn gói và may đo nội thất rời, theo bạn lựa chọn nào tối ưu, mang
+                                đến
+                                nét nhấn nhá mang đậm tính cá nhân cho gia chủ?</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a class="btn card h-100">
+                        <img src="./images/camhung/4.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Mẫu thiết kế nội thất phòng ngủ căn hộ LUMIERE</h5>
+                            <p class="card-text">Sự sáng tạo trong không gian sống, đặc biệt là các thiết kế nội thất
+                                phòng
+                                ngủ luôn là chủ đề khiến nhiều người quan tâm khi làm nhà. Các khách hàng của HAY cũng
+                                không
+                                ngoại lệ, gần đây là các vị gia chủ của dự án căn hộ LUMIERE, càng tiếp xúc chúng tôi
+                                càng
+                                hiểu được tầm quan trọng của nơi nghỉ ngơi lý tưởng đối với quý khách hàng.</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a class="btn card h-100">
+                        <img src="./images/camhung/5.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Gợi ý các phong cách nội thất nổi bật cho căn hộ LUMIERE</h5>
+                            <p class="card-text">Căn hộ LUMIERE là một dự án mới được bàn giao gần đây nhưng để lại dấu
+                                ấn
+                                khá đặc biệt đối với những gia chủ sở hữu. Không chỉ mang lợi thế về vị trí, các tiện
+                                ích
+                                xung quanh mà việc tìm kiếm các phong cách nội thất thể hiện phong cách sống độc đáo,
+                                sang
+                                trọng của cư dân trong khu căn hộ cao cấp này cũng là điều được quan tâm hàng đầu.</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <a class="btn card h-100">
+                        <img src="./images/camhung/6.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Căn hộ LUMIERE: Thiết kế không gian cho gia chủ có gu</h5>
+                            <p class="card-text">Căn hộ LUMIERE riverside được ví như “viên ngọc trai” cuối cùng của khu
+                                vực
+                                Thảo Điền – Nơi có cộng động chuyên gia nước ngoài sinh sống. Tiếp xúc với các vị khách
+                                nơi
+                                đây, đội ngũ HAY Decor có dịp được trò chuyện và kết nối với những gia chủ có gu sống
+                                tối
+                                giản mà vẫn rất ấn tượng.</p>
+                            <button class="btn morebtn align-items-start justify-content-start d-flex">Xem thêm >>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
 </body>
 </html>

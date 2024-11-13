@@ -1,187 +1,167 @@
-.navbar-brand img {
-	max-height: 50px;
+header {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	line-height: 1.42857143;
+	margin: 0;
+	padding: 0;
+	background-color: #F5F5F5;
 }
 
-.navbar-nav .nav-link {
-	font-weight: bold;
-	text-transform: uppercase;
-	transition: 0.2s ease-out;
+header .navbar-nav {
+	justify-content: space-between;
 }
 
-.navbar-nav .nav-link:hover {
-	transition: 0.2s ease;
-	color: #E6B9A6;
+header .nav-item {
+	margin-left: 0.5em;
 }
 
-.navbar-brand img {
-	border-radius: 15%;
-	transition: 0.2s ease;
+/*header .nav-item a:hover {*/
+/*    font-weight: bold;*/
+/*    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);*/
+/*    border-radius: .2em;*/
+/*}*/
+
+.searchbar {
+	margin-left: 5.5em;
+	margin-top: 1em;
 }
 
-.navbar-brand img:hover {
-	transition: 0.2s ease;
-	box-shadow: 0 0 10px 0 #333333;
-	transform: scale(1.1);
+/*header .dropdown:hover > .dropdown-menu {*/
+/*    display: block;*/
+/*    margin-top: .125rem;*/
+/*}*/
+
+.notifi {
+	width: 250px;
 }
 
-.cartbtn {
-	transition: 0.5s ease;
+.make-read a {
+	font-size: 0.8em;
+	color: black;
+	text-decoration: none;
+	background: none;
+}
+
+/*NOTI BOX*/
+.notiBox {
+	position: fixed;
+	top: 80px;
+	right: 10px;
+	background-color: #f5f5f5;
+	color: #000000;
+	padding: 15px;
+	border-radius: 5px;
+	border: gray 2px solid;
+	display: none;
+	z-index: 1000;
+	min-width: 200px;
+	animation: slide-in 0.7s ease-out forwards, slide-out 1.2s 5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+	overflow: hidden;
+}
+
+.close-notiBox {
+	position: absolute;
+	top: 2px;
+	right: 6px;
+	background: none;
 	border: none;
+	color: black;
+	font-size: 1.5em;
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+}
+.notiBox span {
+	padding-right: 10px;
 }
 
-.cartbtn:hover {
-	border-radius: 25%;
-	transition: 0.5s ease-in-out;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	color: #2F3645;
+@keyframes slide-in {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
 
-.navbar .dropdown a {
+@keyframes slide-out {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(150%);
+		opacity: 0;
+	}
+}
+
+.notiBox-progress-bar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 5px;
+	background-color: gray;
+	width: 100%;
+	animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+	from {
+		width: 100%;
+	}
+	to {
+		width: 0;
+	}
+}
+/* Định dạng chung cho dropdown */
+.cDropDown .dropdown-menu {
+	background-color: #f8f9fa; /* Màu nền sáng */
+	border-radius: 5px; /* Bo góc mềm mại */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
+	padding: 0; /* Bỏ padding mặc định */
+}
+
+.cDropDown .dropdown-header {
+	font-size: 14px;
 	font-weight: bold;
-	text-transform: uppercase;
-	transition: 0.2s ease;
+	color: #343a40; /* Màu đậm */
+	padding: 10px 20px; /* Khoảng cách đều trên dưới và trái phải */
+	background-color: #e9ecef; /* Màu nền nhạt hơn */
+	border-bottom: 1px solid #dee2e6; /* Đường kẻ dưới header */
 }
 
-.navbar .dropdown>a:hover {
-	transform: scale(1.1);
-	transition: 0.2s ease-out;
-	color: #E6B9A6;
+.cDropDown .dropdown-item {
+	font-size: 16px;
+	padding: 10px 20px; /* Tạo không gian rộng cho mục */
+	color: #495057; /* Màu chữ tối */
+	transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
 }
 
-.navbar .dropdown-menu,
-.navbar .dropdown-menu a,
-.navbar .dropdown-menu .dropdown-item {
-	transition: 0.2s ease-out;
-	border-radius: 0;
-	background: rgb(255, 255, 255, 0.3);
+.cDropDown .dropdown-item:hover {
+	background-color: #007bff; /* Màu xanh khi hover */
+	color: white; /* Chữ trắng khi hover */
 }
 
-.navbar .dropdown-menu .dropdown-item:hover {
-	color: #E6B9A6;
+/* Hiệu ứng cho phần tử đang được chọn (active) */
+.cDropDown .dropdown-item:active {
+	background-color: #0056b3; /* Màu xanh đậm khi click */
+	color: white;
 }
 
-.navbar .dropdown:hover>.dropdown-menu {
-	display: block;
+/* Bo góc cho mục đầu tiên và cuối cùng trong danh sách */
+.cDropDown .dropdown-menu li:first-child a {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
-/* CSS Document */
-.content .nav-link {
-	color: #2F3645;
-	transition: 0.2s ease;
+.cDropDown .dropdown-menu li:last-child a {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
-.content .nav-link:hover {
-	transition: 0.2s ease-in-out;
-	color: #E6B9A6;
-}
-
-.products .card {
-	transition: 0.2s ease-in-out;
-
-}
-
-.products .card:hover {
-	transition: 0.2s ease-out;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.products .card .txt {
-	transition: 0.2s ease-in-out;
-}
-
-.products .card .txt:hover {
-	transition: 0.2s ease-out;
-	text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-.navbar-brand img {
-	max-height: 50px;
-}
-
-.navbar-nav .nav-link {
-	font-weight: bold;
-	text-transform: uppercase;
-	transition: 0.2s ease-out;
-}
-
-.navbar-nav .nav-link:hover {
-	transition: 0.2s ease;
-	color: #E6B9A6;
-}
-
-.navbar-brand img {
-	border-radius: 15%;
-	transition: 0.2s ease;
-}
-
-.navbar-brand img:hover {
-	transition: 0.2s ease;
-	box-shadow: 0 0 10px 0 #333333;
-	transform: scale(1.1);
-}
-
-.cartbtn {
-	background-color: #2F3645;
-	color: #E6B9A6;
-	border: none;
-}
-
-.cartbtn:hover {
-	background-color: #E6B9A6;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	color: #2F3645;
-}
-
-.header .navbar .dropdown a {
-	font-weight: bold;
-	text-transform: uppercase;
-	transition: 0.2s ease;
-}
-
-.header .navbar .dropdown>a:hover {
-	transform: scale(1.1);
-	transition: 0.2s ease-out;
-	color: #E6B9A6;
-}
-
-.header .navbar .dropdown-menu,
-.header .navbar .dropdown-menu a,
-.header .navbar .dropdown-menu .dropdown-item {
-	transition: 0.2s ease-out;
-	border-radius: 0;
-	background: rgb(255, 255, 255, 0.3);
-}
-
-.header .navbar .dropdown-menu .dropdown-item:hover {
-	color: #E6B9A6;
-}
-
-.header .navbar .dropdown:hover>.dropdown-menu {
-	display: block;
-}
-
-.header .navbar-brand img {
-	max-height: 50px;
-}
-
-.header .navbar-nav .nav-link {
-	font-weight: bold;
-	text-transform: uppercase;
-	transition: 0.2s ease-out;
-}
-
-.header .navbar-nav .nav-link:hover {
-	transition: 0.2s ease;
-	color: #E6B9A6;
-}
-
-.header .navbar-brand img {
-	border-radius: 15%;
-	transition: 0.2s ease;
-}
-
-.header .navbar-brand img:hover {
-	transition: 0.2s ease;
-	box-shadow: 0 0 10px 0 #333333;
-	transform: scale(1.1);
+/* Khoảng cách giữa các nhóm tiêu đề */
+.cDropDown .dropdown-header + .dropdown-item {
+	margin-top: 5px; /* Khoảng cách giữa tiêu đề và mục đầu tiên */
 }

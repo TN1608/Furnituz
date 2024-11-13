@@ -1,176 +1,111 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:s="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<header class="header" th:fragment="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/asm_new/home"><img src="./icon/logo.png" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false"
-                    aria-label="Toggle navigation">
+<header th:fragment="header">
+    <div class="d-flex justify-content-end me-4">
+        <span class="text-muted">Ngôn ngữ:</span><a href="?lang=vi" class="text-decoration-none">vi-VN</a>
+        <span class="text-muted">|</span><a href="?lang=en" class="text-decoration-none">en-US</a>
+    </div>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary align-items-center d-flex justify-content-center">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
+            <a class="nav-brand navbar-toggler text-decoration-none border border-0" th:href="@{/home}">
+                <img th:src="@{/images/icon/logo.png}" alt="logo" width="20" height="20"
+                     class="d-inline-block align-top"> ApartmentWorld</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" th:href="@{/home}">
+                    <img th:src="@{/images/icon/logo.png}" alt="logo" width="30" height="30"
+                         class="d-inline-block align-top">
+                    <span>TheDoor</span>
+                </a>
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item d-flex align-items-center ms-5">
+                        <a class="nav-link" th:href="@{/lienhe}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.mn.contact}"></span></a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a class="nav-link" th:href="@{/order}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.mn.order}"></span></a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
                         <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">NỘI
-                                THẤT
+                            <a class="dropdown-toggle nav-link" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="bi bi-bell-fill text-warning me-2"></i><span th:text="#{header.mn.notification}"></span>
+                                <span th:if="${not #lists.isEmpty(notifications)}" class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle"
+                                      style="left: 15%">
+                                   <span class="visually-hidden">New alerts</span>
+                                </span>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">PHÒNG KHÁCH</a></li>
-                                <li><a class="dropdown-item" href="#">PHÒNG ĂN</a></li>
-                                <li><a class="dropdown-item" href="#">PHÒNG NGỦ</a></li>
-                                <li><a class="dropdown-item" href="#">PHÒNG LÀM VIỆC</a></li>
-                                <li><a class="dropdown-item" href="#">BẾP</a></li>
-                                <li><a class="dropdown-item" href="#">BAN CÔNG</a></li>
+                            <ul class="dropdown-menu p-2">
+                                <li>
+                                    <h4 class="fw-bold text-center notifi" th:text="#{header.mn.notification}"></h4>
+                                    <hr>
+                                    <p th:if="${#lists.isEmpty(notifications)}" class="text-center" th:text="#{header.mn.notification}"></p>
+                                    <div th:if="${not #lists.isEmpty(notifications)}">
+                                        <div th:each="tb : ${notifications}" class="d-flex flex-column ">
+                                            <label th:text="${tb.message}"></label>
+                                            <label>Vào lúc: <span th:text="${#dates.format(tb.createAt, 'dd/MM/yy hh:mm:ss a')}"></span></label>
+                                            <hr class="mt-1 mb-2"/>
+                                        </div>
+                                        <label class="make-read d-flex justify-content-end">
+                                            <a id="readAllNotifications" class=""><span th:text="#{header.mn.notification.readAll}"></span></a>
+                                        </label>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li th:if="${not #strings.isEmpty(user)}" class="nav-item d-flex align-items-center cDropDown">
                         <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">SOFA
+                            <a class="dropdown-toggle nav-link d-block justify-content-center" th:href="@{/user}"
+                               role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa-solid fa-user"></i>
+                                <span th:if="${#strings.isEmpty(user.firstname) and #strings.isEmpty(user.lastname)}" th:text="${user.tentaikhoan}"></span>
+                                <span th:if="${not #strings.isEmpty(user.firstname) or not #strings.isEmpty(user.lastname)}" th:text="${user.firstname} + ' ' + ${user.lastname}"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">SOFA</a></li>
-                                <li><a class="dropdown-item" href="#">ĐÔN</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ DIVA</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ THƯ GIÃN</a></li>
-                                <li><a class="dropdown-item" href="#">GỐI SOFA</a></li>
+                                <li class="dropdown-header">Tiện ích</li>
+                                <li><a class="dropdown-item" th:href="@{/wishlists}"><span th:text="#{header.mn.wishlist}"></span></a></li>
+                                <li class="dropdown-header">Dịch vụ trả phí</li>
+                                <li><a class="dropdown-item" th:href="@{/user/settings/payment-history}"><span th:text="header.mn.paymentHistory"></span></a></li>
+                                <li class="dropdown-header">Khác</li>
+                                <li><a class="dropdown-item" th:href="@{/user}"><span th:text="header.mn.profile"></span></a></li>
+                                <li><a class="dropdown-item" th:href="@{/logout}"><span th:text="#{header.mn.logout}"></span></a></li>
+                                <li th:if="${user.vaitro}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li th:if="${#strings.isEmpty(user)}" class="nav-item d-flex align-items-center">
                         <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">BÀN
+                            <a class="dropdown-toggle nav-link d-block justify-content-center" th:href="@{/user}"
+                               role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa-solid fa-user"></i>
+                                <span th:text="#{header.mn.account}"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">BÀN CAFE</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN GÓC</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN ĂN</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN LÀM VIỆC</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN TRANG ĐIỂM</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN BAN CÔNG</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN CHO BÉ</a></li>
-                                <li><a class="dropdown-item" href="#">BÀN CONSOLE</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">GHẾ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">GHẾ ĂN</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ BAN CÔNG</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ BĂNG</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ BAR</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ CAFE</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ ĐÔN</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ VĂN PHÒNG</a></li>
-                                <li><a class="dropdown-item" href="#">GHẾ TRANG ĐIỂM</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">TỦ KỆ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">KỆ TIVI</a></li>
-                                <li><a class="dropdown-item" href="#">KỆ SÁCH</a></li>
-                                <li><a class="dropdown-item" href="#">KỆ TRANG TRÍ</a></li>
-                                <li><a class="dropdown-item" href="#">TỦ GIÀY</a></li>
-                                <li><a class="dropdown-item" href="#">TỦ LY CHÉN</a></li>
-                                <li><a class="dropdown-item" href="#">TỦ QUẦN ÁO</a></li>
-                                <li><a class="dropdown-item" href="#">TỦ TRANG ĐIỂM</a></li>
-                                <li><a class="dropdown-item" href="#">GIÁ TREO</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">GIƯỜNG
-                                NGỦ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">GIƯỜNG CHO BÉ</a></li>
-                                <li><a class="dropdown-item" href="#">GIƯỜNG</a></li>
-                                <li><a class="dropdown-item" href="#">TỦ ĐẦU GIƯỜNG</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">ĐÈN
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">ĐÈN BÀN</a></li>
-                                <li><a class="dropdown-item" href="#">ĐÈN SÀN</a></li>
-                                <li><a class="dropdown-item" href="#">ĐÈN TRẦN</a></li>
-                                <li><a class="dropdown-item" href="#">ĐÈN TƯỜNG</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">BẾP
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">TỦ BẾP</a></li>
-                                <li><a class="dropdown-item" href="#">BỘ ĐỒ GỐM SỨ</a></li>
-                                <li><a class="dropdown-item" href="#">ĐỒ DÙNG BÀN ĂN</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">ĐỒ
-                                TRANG TRÍ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">BÌNH HOA</a></li>
-                                <li><a class="dropdown-item" href="#">GƯƠNG</a></li>
-                                <li><a class="dropdown-item" href="#">GỐI SOFA</a></li>
-                                <li><a class="dropdown-item" href="#">ĐỒNG HỒ</a></li>
-                                <li><a class="dropdown-item" href="#">LỒNG ĐÈN NẾN</a></li>
-                                <li><a class="dropdown-item" href="#">TRANH VÀ KHUNG ẢNH</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div class="dropdown">
-                            <a class="navlink btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">DỊCH VỤ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" th:href="@{/login}"><span th:text="#{header.mn.login}"></span></a>
+                                </li>
+                                <li><a class="dropdown-item" th:href="@{/signup}"><span th:text="#{header.mn.register}"></span></a></li>
                             </ul>
                         </div>
                     </li>
                 </ul>
-                <div class="d-flex cart">
-                    <a href="/asm_new/account" class="btn btn-outline-success me-2"><i class="bi bi-person-fill"></i>Đăng nhập</a>
-                    <%--cart btn--%>
-                    <div class="dropdown">
-                        <button class="btn cartbtn dropdown-toggle" type="button" id="dropdownCartButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-bag-fill"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownCartButton">
-                            <li><a class="dropdown-item" href="#">Trống</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
 </header>
+<div class="notiBox" id="notificationBox">
+    <span id="notiBoxMessage" th:text="${notiBox}"></span>
+    <button class="close-notiBox" id="closeNotiBox">&times;</button>
+    <div class="notiBox-progress-bar" id="notiBoxProgressBar"></div>
+</div>
 </body>
 </html>
