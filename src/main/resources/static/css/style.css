@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+
+.content .page-link {
+	color: #2F3645;
+	transition: 0.2s ease;
+}
+
+.content .page-link:hover {
+	transition: 0.2s ease;
+	color: #E6B9A6;
+}
+
+.content .softbtn {
+	font-weight: bold;
+	border: 1px solid #2F3645;
+	border-radius: 0;
+	transition: 0.2s ease;
+}
+
+.content .softbtn:hover {
+	color: #006769;
+	transition: 0.2s ease;
+}
+
+.section2 .card {
+	cursor: default;
+	border: 1px solid #2F3645;
+}
+
+.section2 .card img {
+	cursor: pointer;
+}
+
+.section2 .card-title {
+	text-align: start;
+	cursor: pointer;
+}
+
+.section2 .card-text {
+	text-align: start;
+	cursor: text;
+}
+
+.section2 .card-title:hover {
+	color: #EF5A6F;
+}
+
+.section2 .card .morebtn {
+	color: #333333;
+	font-weight: bold;
+	transition: 0.2s ease;
+}
+
+.section2 .card .morebtn:hover {
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	transition: 0.2s ease-in-out;
+}

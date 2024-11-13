@@ -1,0 +1,187 @@
+.navbar-brand img {
+	max-height: 50px;
+}
+
+.navbar-nav .nav-link {
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s ease-out;
+}
+
+.navbar-nav .nav-link:hover {
+	transition: 0.2s ease;
+	color: #E6B9A6;
+}
+
+.navbar-brand img {
+	border-radius: 15%;
+	transition: 0.2s ease;
+}
+
+.navbar-brand img:hover {
+	transition: 0.2s ease;
+	box-shadow: 0 0 10px 0 #333333;
+	transform: scale(1.1);
+}
+
+.cartbtn {
+	transition: 0.5s ease;
+	border: none;
+}
+
+.cartbtn:hover {
+	border-radius: 25%;
+	transition: 0.5s ease-in-out;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	color: #2F3645;
+}
+
+.navbar .dropdown a {
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+}
+
+.navbar .dropdown>a:hover {
+	transform: scale(1.1);
+	transition: 0.2s ease-out;
+	color: #E6B9A6;
+}
+
+.navbar .dropdown-menu,
+.navbar .dropdown-menu a,
+.navbar .dropdown-menu .dropdown-item {
+	transition: 0.2s ease-out;
+	border-radius: 0;
+	background: rgb(255, 255, 255, 0.3);
+}
+
+.navbar .dropdown-menu .dropdown-item:hover {
+	color: #E6B9A6;
+}
+
+.navbar .dropdown:hover>.dropdown-menu {
+	display: block;
+}
+
+/* CSS Document */
+.content .nav-link {
+	color: #2F3645;
+	transition: 0.2s ease;
+}
+
+.content .nav-link:hover {
+	transition: 0.2s ease-in-out;
+	color: #E6B9A6;
+}
+
+.products .card {
+	transition: 0.2s ease-in-out;
+
+}
+
+.products .card:hover {
+	transition: 0.2s ease-out;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.products .card .txt {
+	transition: 0.2s ease-in-out;
+}
+
+.products .card .txt:hover {
+	transition: 0.2s ease-out;
+	text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-brand img {
+	max-height: 50px;
+}
+
+.navbar-nav .nav-link {
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s ease-out;
+}
+
+.navbar-nav .nav-link:hover {
+	transition: 0.2s ease;
+	color: #E6B9A6;
+}
+
+.navbar-brand img {
+	border-radius: 15%;
+	transition: 0.2s ease;
+}
+
+.navbar-brand img:hover {
+	transition: 0.2s ease;
+	box-shadow: 0 0 10px 0 #333333;
+	transform: scale(1.1);
+}
+
+.cartbtn {
+	background-color: #2F3645;
+	color: #E6B9A6;
+	border: none;
+}
+
+.cartbtn:hover {
+	background-color: #E6B9A6;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	color: #2F3645;
+}
+
+.header .navbar .dropdown a {
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s ease;
+}
+
+.header .navbar .dropdown>a:hover {
+	transform: scale(1.1);
+	transition: 0.2s ease-out;
+	color: #E6B9A6;
+}
+
+.header .navbar .dropdown-menu,
+.header .navbar .dropdown-menu a,
+.header .navbar .dropdown-menu .dropdown-item {
+	transition: 0.2s ease-out;
+	border-radius: 0;
+	background: rgb(255, 255, 255, 0.3);
+}
+
+.header .navbar .dropdown-menu .dropdown-item:hover {
+	color: #E6B9A6;
+}
+
+.header .navbar .dropdown:hover>.dropdown-menu {
+	display: block;
+}
+
+.header .navbar-brand img {
+	max-height: 50px;
+}
+
+.header .navbar-nav .nav-link {
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: 0.2s ease-out;
+}
+
+.header .navbar-nav .nav-link:hover {
+	transition: 0.2s ease;
+	color: #E6B9A6;
+}
+
+.header .navbar-brand img {
+	border-radius: 15%;
+	transition: 0.2s ease;
+}
+
+.header .navbar-brand img:hover {
+	transition: 0.2s ease;
+	box-shadow: 0 0 10px 0 #333333;
+	transform: scale(1.1);
+}
