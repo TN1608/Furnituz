@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org"th:replace="~{/layout/layout.html :: dynamic(~{::title}, ~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container p-5 CartContent" th:fragment="Cart">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="CartItem">
+                            <div class="card mb-4" th:each="cartItem : ${cart}">
+                                <img th:src="@{${cartItem.product.anhsp}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <div class="text-section">
+                                    <h5 class="card-title" th:text="${cartItem.product.tensp}"></h5>
+                                    <p class="card-text" th:text="${cartItem.product.mota}"></p>
+                                    </div>
+                                    <div class="cta-section">
+                                        <p class="card-text" th:text="${cartItem.product.gia + '$'}"></p>
+                                        <a th:href="@{/cart/remove(id=${cartItem.product.masp})}" class="btn btn-outline-danger">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="cart-summary">
+                    <h3>Thông tin đơn hàng</h3>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td>Tạm tính:</td>
+                            <td th:text="${total}"></td>
+                        </tr>
+                        <tr>
+                            <td>Phí vận chuyển:</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng cộng:</td>
+                            <td th:text="${total}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{/submitOrder(amount=${#numbers.formatInteger(total, 0)},orderInfo='Thanh Toan don hang')}" class="btn btn-primary">Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -15,8 +15,9 @@ import org.hibernate.annotations.Nationalized;
 @Table(name = "danhmuc")
 public class Danhmuc {
     @Id
-    @Size(max = 20)
-    @Column(name = "madm", nullable = false, length = 20)
+    @Size(max = 200)
+    @Nationalized
+    @Column(name = "madm", nullable = false, length = 200)
     private String madm;
 
     @Size(max = 200)

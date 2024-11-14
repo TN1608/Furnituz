@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout.html :: dynamic(~{::title}, ~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body  th:fragment="signup">
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-6 log-banner overflow-hidden">
+            <img th:src="@{/images/banner/login.jpg}" alt="login" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <form th:action="@{/account/signup}" th:object="${user}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Tên đăng ký</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:text="#{valid.username}"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" th:field="*{gmail}"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('gmail')}" th:errors="*{gmail}" th:text="#{valid.gmail}"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}"/>
+                    <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:text="#{valid.password}"></p>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Nhập lại mật khẩu</label>
+                    <input type="password" class="form-control" id="Cpassword" name="cpass"/>
+<!--                    <p class="text-danger" th:if="${PError}" th:text="${PError}"></p>-->
+                </div>
+
+                <button type="submit" class="btn btn-primary">Đăng ký</button>
+                <br>
+                <p>Đã có tài khoản?<a th:href="@{/account/login}" class="btn btn-success">Đăng nhập</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

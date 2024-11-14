@@ -23,13 +23,13 @@ public class Sanpham {
 
     @Size(max = 500)
     @Nationalized
+    @Column(name = "mota", length = 500)
+    private String mota;
+
+    @Size(max = 500)
+    @Nationalized
     @Column(name = "anhsp", length = 500)
     private String anhsp;
-
-    @Nationalized
-    @Lob
-    @Column(name = "mota")
-    private String mota;
 
     @Column(name = "gia")
     private Double gia;

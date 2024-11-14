@@ -78,13 +78,13 @@
                  role="tabpanel" aria-labelledby="chair-tab" tabindex="0">
                 <div class="container products">
                     <div class="row">
-                            <div th:each="product : ${Sanpham}" class="col-md-3 mb-2" action="prodview" method="post">
+                            <div th:each="product : ${Sanpham}" th:if="${product.madanhmuc.tendm  == 'GHẾ'} and ${product.trangthai == true}" class="col-md-3 mb-2" action="prodview" method="post">
                                 <div class="card">
                                     <img th:src="${product.anhsp}" id="anhsp" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
-                                        <p class="card-text text-center fs-5" th:text="${product.gia}"></p>
-                                        <a href="#" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
+                                        <p class="card-text text-center fs-5" th:text="${#numbers.formatCurrency(product.gia)} + 'VND'"></p>
+                                        <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
                                     </div>
                                 </div>
                             </div>
@@ -95,99 +95,13 @@
                  aria-labelledby="table-tab" tabindex="0">
                 <div class="container products">
                     <div class="row">
-                        <div class="col-md-3 mb-2">
+                        <div class="col-md-3 mb-2" th:each="product : ${Sanpham}" th:if="${product.madanhmuc.tendm == 'BÀN'} and ${product.trangthai == true}">
                             <div class="card">
-                                <img src="./images/table/LUCERA.jpg" class="card-img-top" alt="...">
+                                <img th:src="${product.anhsp}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn Lucera</h5>
-                                    <p class="card-text text-center fs-5">420$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/LEONA.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn Leona</h5>
-                                    <p class="card-text text-center fs-5">340$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/SATARU.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn cafe Sakutara</h5>
-                                    <p class="card-text text-center fs-5">210$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/IKACHI.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn console IKACHI</h5>
-                                    <p class="card-text text-center fs-5">122$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/MUSHROOM.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn Mushroom</h5>
-                                    <p class="card-text text-center fs-5">220$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/LANDO.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn LANDO</h5>
-                                    <p class="card-text text-center fs-5">100$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/PINWHEEL.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn PINWHEEL</h5>
-                                    <p class="card-text text-center fs-5">200$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/table/FRAMMY.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Bàn ăn Frammy</h5>
-                                    <p class="card-text text-center fs-5">300$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
+                                    <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
+                                    <p class="card-text text-center fs-5" th:text="${#numbers.formatCurrency(product.gia)} + 'VND'"></p>
+                                    <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
                                 </div>
                             </div>
                         </div>
@@ -315,12 +229,12 @@
         <hr class="w-100">
         <div class="row">
             <div class="col-md-8">
-                <img src="./icon/1.jpg" class="img-fluid" alt="...">
+                <img src="./images/icon/1.jpg" class="img-fluid" alt="...">
             </div>
             <div class="col-md-4">
                 <h6 class="text-center mb-2">Giảm đến 50% chi phí thiết kế với dịch vụ thiết kế thi công nội thất trọn
                     gói.</h6>
-                <img src="./icon/2.jpg" alt="..." class="img-fluid">
+                <img src="./images/icon/2.jpg" alt="..." class="img-fluid">
             </div>
         </div>
         <section class="section2">
