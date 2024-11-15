@@ -26,9 +26,8 @@ public class User {
     @NotBlank(message = "{valid.username}")
     private String username;
 
-    @Size(max = 50)
     @Nationalized
-    @Column(name = "password", length = 50)
+    @Column(name = "password")
     @NotBlank(message = "{valid.password}")
     private String password;
 

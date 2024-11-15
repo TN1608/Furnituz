@@ -1,4 +1,4 @@
-package java6.com.map;
+package java6.com.services;
 
 import java6.com.dao.SanphamDAO;
 import java6.com.model.Sanpham;

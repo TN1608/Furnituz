@@ -9,6 +9,7 @@ import java6.com.model.Sanpham;
 import java6.com.services.SessionService;
 import java6.com.services.VNPAYService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class CartController {
     lsttDAO lsDAO;
     @Autowired
     VNPAYService vnPayService;
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @RequestMapping("/cart")
     public String cart(Model model){
         List<CartItem> cart = session.get("Cart");

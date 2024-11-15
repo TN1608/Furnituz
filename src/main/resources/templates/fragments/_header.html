@@ -77,13 +77,13 @@
                             </ul>
                         </div>
                     </li>
-                    <li th:if="${not #strings.isEmpty(user)}" class="nav-item d-flex align-items-center cDropDown">
+                    <li th:if="${user != null}" class="nav-item d-flex align-items-center cDropDown">
                         <div class="dropdown">
                             <a class="dropdown-toggle nav-link d-block justify-content-center" th:href="@{/user}"
                                role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
                                 <i class="fa-solid fa-user"></i>
-                                <span th:if="${#strings.isEmpty(user.username)}" th:text="${user.username}"></span>
+                                <span th:text="${user.username}"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Tiện ích</li>
@@ -92,12 +92,12 @@
                                 <li><a class="dropdown-item" th:href="@{/user/settings/payment-history}"><span th:text="header.mn.paymentHistory"></span></a></li>
                                 <li class="dropdown-header">Khác</li>
                                 <li><a class="dropdown-item" th:href="@{/user}"><span th:text="header.mn.profile"></span></a></li>
-                                <li><a class="dropdown-item" th:href="@{/logout}"><span th:text="#{header.mn.logout}"></span></a></li>
-                                <li th:if="${user.role}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
+                                <li><a class="dropdown-item" th:href="@{/account/logout}"><span th:text="#{header.mn.logout}"></span></a></li>
+                                <li th:if="${user.role == 'ROLE_ADMIN'}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
                             </ul>
                         </div>
                     </li>
-                    <li th:if="${#strings.isEmpty(user)}" class="nav-item d-flex align-items-center">
+                    <li th:if="${user == null}" class="nav-item d-flex align-items-center">
                         <div class="dropdown">
                             <a class="dropdown-toggle nav-link d-block justify-content-center" th:href="@{/user}"
                                role="button" data-bs-toggle="dropdown"

@@ -17,9 +17,10 @@
                                     <div class="text-section">
                                     <h5 class="card-title" th:text="${cartItem.product.tensp}"></h5>
                                     <p class="card-text" th:text="${cartItem.product.mota}"></p>
+                                    <p class="card-text" th:text="${cartItem.product.gia + '$'}"></p>
                                     </div>
                                     <div class="cta-section">
-                                        <p class="card-text" th:text="${cartItem.product.gia + '$'}"></p>
+                                        <p class="card-text">Số lượng: <span class="card-text" th:text="${cartItem.quantity}"></span></p>
                                         <a th:href="@{/cart/remove(id=${cartItem.product.masp})}" class="btn btn-outline-danger">Remove</a>
                                     </div>
                                 </div>
