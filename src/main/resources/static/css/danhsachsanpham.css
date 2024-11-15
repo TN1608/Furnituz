@@ -1,0 +1,79 @@
+/* Import Google font - Poppins */
+@import
+url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap')
+;
+
+.container {
+    max-width: 1100px;
+}
+
+#filterable-cards {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#filterable-cards .card {
+    flex: 1 1 calc(33% - 1rem);
+    max-width: 25rem;
+    border: 2px solid #A6AEBF;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#filterable-cards .card img {
+    height: 20rem;
+    max-width: 26em;
+    object-fit: cover;
+
+}
+#filterable-cards .btn-section{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+#filterable-cards .btnA{
+    margin-right: 10px;
+    max-width: 100%;
+    background-color: #FFF7D1;
+    transition: 0.4s ease;
+}
+#filterable-cards .btnA:hover{
+    background-color: #FFD700;
+}
+#filterable-cards .btnB{
+    max-width: 100%;
+    background-color: #D0E8C5;
+    transition: 0.4s ease;
+}
+#filterable-cards .btnB:hover{
+    background-color: #00FF00;
+}
+
+#filterable-cards .card:hover{
+    transform: scale(1.05);
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+#filterable-cards .card-body {
+    text-align: center;
+}
+
+#filterable-cards .card-body a {
+    color: black;
+    text-decoration: none;
+}
+
+@media ( max-width : 992px) {
+    #filterable-cards .card {
+        flex: 1 1 calc(50% - 1rem);
+    }
+}
+
+@media ( max-width : 600px) {
+    #filterable-cards .card {
+        flex: 1 1 100%;
+    }
+}

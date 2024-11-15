@@ -37,27 +37,6 @@
     <div class="container-fluid p-5">
         <h4 class="text-center">Danh mục sản phẩm đang hot</h4>
         <hr class="w-100">
-        <ul class="nav nav-underline justify-content-center fw-bold mb-5"
-            id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="chair-tab" data-bs-toggle="tab"
-                        data-bs-target="#chair-tab-pane" type="button" role="tab"
-                        aria-controls="chair-tab-pane" aria-selected="true">Ghế
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="table-tab" data-bs-toggle="tab"
-                        data-bs-target="#table-tab-pane" type="button" role="tab"
-                        aria-controls="table-tab-pane" aria-selected="false">Bàn
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="shelf-tab" data-bs-toggle="tab"
-                        data-bs-target="#shelf-tab-pane" type="button" role="tab"
-                        aria-controls="shelf-tab-pane" aria-selected="false">Kệ - Tủ
-                </button>
-            </li>
-        </ul>
         <div class="d-flex justify-content-end align-items-center mb-2">
             <div class="container dropdown text-end">
                 <button class="btn dropdown-toggle softbtn" type="button" data-bs-toggle="dropdown"
@@ -65,163 +44,32 @@
                     Sắp xếp sản phẩm
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Giá : Cao > Thấp</a></li>
-                    <li><a class="dropdown-item" href="#">Giá : Thấp > Cao</a></li>
+                    <li><a class="dropdown-item" th:href="@{/home(sort='desc')}">Giá : Cao > Thấp</a></li>
+                    <li><a class="dropdown-item" th:href="@{/home(sort='asc')}">Giá : Thấp > Cao</a></li>
                     <li><a class="dropdown-item" href="#">Mới nhất</a></li>
                 </ul>
             </div>
             <input class="form-control w-25" type="search" placeholder="Tìm kiếm sản phẩm"
                    aria-label="Search">
         </div>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="chair-tab-pane"
-                 role="tabpanel" aria-labelledby="chair-tab" tabindex="0">
-                <div class="container products">
-                    <div class="row">
-                            <div th:each="product : ${Sanpham}" th:if="${product.madanhmuc.tendm  == 'GHẾ'} and ${product.trangthai == true}" class="col-md-3 mb-2" action="prodview" method="post">
-                                <div class="card">
-                                    <img th:src="${product.anhsp}" id="anhsp" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
-                                        <p class="card-text text-center fs-5" th:text="${#numbers.formatDecimal(product.gia,0,0)} + 'VND'"></p>
-                                        <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="table-tab-pane" role="tabpanel"
-                 aria-labelledby="table-tab" tabindex="0">
-                <div class="container products">
-                    <div class="row">
-                        <div class="col-md-3 mb-2" th:each="product : ${Sanpham}" th:if="${product.madanhmuc.tendm == 'BÀN'} and ${product.trangthai == true}">
-                            <div class="card">
-                                <img th:src="${product.anhsp}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
-                                    <p class="card-text text-center fs-5" th:text="${#numbers.formatDecimal(product.gia,0,0)} + 'VND'"></p>
-                                    <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="shelf-tab-pane" role="tabpanel"
-                 aria-labelledby="shelf-tab" tabindex="0">
-                <div class="container products">
-                    <div class="row">
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/ANNIA.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Tủ ANNIA </h5>
-                                    <p class="card-text text-center fs-5">420$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/TENCHI.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Kệ TIVI TENCHI</h5>
-                                    <p class="card-text text-center fs-5">340$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/BUFFETPATO.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Tủ buffet PATO</h5>
-                                    <p class="card-text text-center fs-5">210$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/CLOUDER.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Tủ bếp clouder</h5>
-                                    <p class="card-text text-center fs-5">122$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/BLE.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Tủ chic BLUE</h5>
-                                    <p class="card-text text-center fs-5">220$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/TOHOOAK.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Tủ sồi TOHO</h5>
-                                    <p class="card-text text-center fs-5">100$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/COSETA.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Kệ COSETA</h5>
-                                    <p class="card-text text-center fs-5">200$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-2">
-                            <div class="card">
-                                <img src="./images/shelf/MATTEO.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">Kệ Tivi MATEO</h5>
-                                    <p class="card-text text-center fs-5">300$</p>
-                                    <a href="#"
-                                       class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi
-                                        tiết sản phẩm</a>
-                                </div>
-                            </div>
+        <div class="container products">
+            <div class="row">
+                <div th:each="product : ${Sanpham}" th:if="${product.trangthai==true}" class="col-md-3 mb-2" action="prodview" method="post">
+                    <div class="card">
+                        <img th:src="${product.anhsp}" id="anhsp" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
+                            <p class="card-text text-center fs-5" th:text="${#numbers.formatDecimal(product.gia,0,0)} + 'VND'"></p>
+                            <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
                         </div>
                     </div>
                 </div>
             </div>
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center mt-2 fw-bold">
-                    <li class="page-item disabled">
-                        <a class="page-link"><span aria-hidden="true">&laquo;</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#"><span aria-hidden="true">&raquo;</span></a>
-                    </li>
+                    <li class="page-item"><a class="page-link" th:href="@{/home(p=${currentPage - 1}, sort=${sort})}" th:if="${currentPage > 0}"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="page-item"><span class="page-link" th:text="${currentPage + 1}"></span></li>
+                    <li class="page-item"><a class="page-link" th:href="@{/home(p=${currentPage + 1}, sort=${sort})}" th:if="${currentPage < totalPages - 1}"><span aria-hidden="true">&raquo;</span></a></li>
                 </ul>
             </nav>
         </div>
