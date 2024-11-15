@@ -83,7 +83,7 @@
                                     <img th:src="${product.anhsp}" id="anhsp" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
-                                        <p class="card-text text-center fs-5" th:text="${#numbers.formatCurrency(product.gia)} + 'VND'"></p>
+                                        <p class="card-text text-center fs-5" th:text="${#numbers.formatDecimal(product.gia,0,0)} + 'VND'"></p>
                                         <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                 <img th:src="${product.anhsp}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-center" th:text="${product.tensp}"></h5>
-                                    <p class="card-text text-center fs-5" th:text="${#numbers.formatCurrency(product.gia)} + 'VND'"></p>
+                                    <p class="card-text text-center fs-5" th:text="${#numbers.formatDecimal(product.gia,0,0)} + 'VND'"></p>
                                     <a th:href="@{/product/{id}(id=${product.masp})}" class="btn btn-outline-danger fw-bold align-items-center justify-content-center d-flex txt">Chi tiết sản phẩm</a>
                                 </div>
                             </div>
