@@ -7,6 +7,8 @@ import java6.com.services.CookieService;
 import java6.com.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,8 @@ public class LoginController {
     UserDAO dao;
     @Autowired
     PasswordEncoder pe;
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+
+
     @RequestMapping("/login")
     public String login(Model model,
                         @RequestParam(value = "remember",defaultValue = "false") boolean remember,
@@ -54,6 +57,8 @@ public class LoginController {
         }else{
             cookie.remove("user");
         }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Authenticated User: " + auth.getName());
         model.addAttribute("user",user);
         return "redirect:/home";
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:s="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -87,7 +87,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Tiện ích</li>
-                                <li><a class="dropdown-item" th:href="@{/wishlists}"><span th:text="#{header.mn.wishlist}"></span></a></li>
+                                <li><a class="dropdown-item" th:href="@{/cart}"><span th:text="#{header.mn.cart}"></span></a></li>
                                 <li class="dropdown-header">Dịch vụ trả phí</li>
                                 <li><a class="dropdown-item" th:href="@{/profile/lich-su-thanh-toan}"><span th:text="#{header.mn.paymentHistory}"></span></a></li>
                                 <li class="dropdown-header">Khác</li>

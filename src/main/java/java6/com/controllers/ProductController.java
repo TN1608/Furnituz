@@ -23,7 +23,7 @@ import java.util.Optional;
 @Controller
 @PreAuthorize("hasAnyRole('USER','ADMIN')")
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController extends AuthController {
     @Autowired
     SanphamDAO dao;
     @Autowired

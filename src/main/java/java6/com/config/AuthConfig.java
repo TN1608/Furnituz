@@ -22,6 +22,9 @@ public class AuthConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        //CSRF va CORS
+        http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable());
+
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
@@ -44,4 +47,13 @@ public class AuthConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+//                .and()
+//                .withUser("admin").password(passwordEncoder().encode("password")).roles("ADMIN");
+//    }
+
 }

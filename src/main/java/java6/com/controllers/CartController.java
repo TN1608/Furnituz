@@ -22,7 +22,7 @@ import java.util.List;
 
 @Controller
 
-public class CartController {
+public class CartController extends AuthController {
     @Autowired
     SessionService session;
     @Autowired

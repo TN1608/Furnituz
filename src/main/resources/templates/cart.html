@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" th:if="${cart} != null">
                         <div class="CartItem">
                             <div class="card mb-4" th:each="cartItem : ${cart}">
                                 <img th:src="@{${cartItem.product.anhsp}}" class="card-img-top" alt="...">
@@ -26,6 +26,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-body" th:if="${cart} == null">
+                        <h3>Giỏ hàng trống</h3>
                     </div>
                 </div>
             </div>
