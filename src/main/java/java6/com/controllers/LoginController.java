@@ -1,6 +1,7 @@
 package java6.com.controllers;
 
 import jakarta.validation.Valid;
+import java6.com.config.AuthInterceptor;
 import java6.com.dao.UserDAO;
 import java6.com.model.User;
 import java6.com.services.CookieService;
@@ -30,7 +31,6 @@ public class LoginController {
     @Autowired
     PasswordEncoder pe;
 
-
     @RequestMapping("/login")
     public String login(Model model,
                         @RequestParam(value = "remember",defaultValue = "false") boolean remember,
@@ -59,6 +59,7 @@ public class LoginController {
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("Authenticated User: " + auth.getName());
+        System.out.println("LOGGED IN : "+user.getRole());
         model.addAttribute("user",user);
         return "redirect:/home";
     }
@@ -74,7 +75,13 @@ public class LoginController {
             model.addAttribute("PError", "Passwords do not match");
             return "signup";
         }
-        user.setRole(false);
+        //check user exist
+        if(dao.findById(user.getUsername()).isPresent()){
+            model.addAttribute("message","Tài khoản đã tồn tại");
+            return "signup";
+        }
+        //set role
+        user.setRole("USER");
         //ma hoa mat khau
         String encodedPassword = pe.encode(user.getPassword());
         user.setPassword(encodedPassword);

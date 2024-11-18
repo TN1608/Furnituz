@@ -37,22 +37,22 @@
                         </ul>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" th:href="@{/lienhe}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.mn.contact}"></span></a>
+                        <a class="nav-link" th:href="@{/lienhe}"><span th:text="#{header.mn.contact}"></span></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" th:href="@{/order}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.mn.order}"></span></a>
+                        <a class="nav-link" th:href="@{/order}"><span th:text="#{header.mn.order}"></span></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" th:href="@{/product/danh-sach-san-pham/{danhmuc}(danhmuc='GHẾ')}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.category.chair}"></span></a>
+                        <a class="nav-link" th:href="@{/product/danh-sach-san-pham/{danhmuc}(danhmuc='GHẾ')}"><span th:text="#{header.category.chair}"></span></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
-                        <a class="nav-link" th:href="@{/product/danh-sach-san-pham/{danhmuc}(danhmuc='BÀN')}"><i class="bi bi-bag-fill text-success me-2"></i><span th:text="#{header.category.table}"></span></a>
+                        <a class="nav-link" th:href="@{/product/danh-sach-san-pham/{danhmuc}(danhmuc='BÀN')}"><span th:text="#{header.category.table}"></span></a>
                     </li>
                     <li class="nav-item d-flex align-items-center">
                         <div class="dropdown">
                             <a class="dropdown-toggle nav-link" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                <i class="bi bi-bell-fill text-warning me-2"></i><span th:text="#{header.mn.notification}"></span>
+                                <i class="fa-regular fa-bell text-warning me-2"></i><span th:text="#{header.mn.notification}"></span>
                                 <span th:if="${not #lists.isEmpty(notifications)}" class="position-absolute translate-middle p-2 bg-danger border border-light rounded-circle"
                                       style="left: 15%">
                                    <span class="visually-hidden">New alerts</span>
@@ -82,7 +82,7 @@
                             <a class="dropdown-toggle nav-link d-block justify-content-center" th:href="@{/user}"
                                role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
-                                <i class="fa-solid fa-user"></i>
+                                <i class="fa-regular fa-user"></i>
                                 <span th:text="${user.username}"></span>
                             </a>
                             <ul class="dropdown-menu">
@@ -93,7 +93,7 @@
                                 <li class="dropdown-header">Khác</li>
                                 <li><a class="dropdown-item" th:href="@{/user}"><span th:text="header.mn.profile"></span></a></li>
                                 <li><a class="dropdown-item" th:href="@{/account/logout}"><span th:text="#{header.mn.logout}"></span></a></li>
-                                <li th:if="${user.role == 'ROLE_ADMIN'}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
+                                <li th:if="${user.role == 'ADMIN'}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
                             </ul>
                         </div>
                     </li>

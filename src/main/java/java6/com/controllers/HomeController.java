@@ -34,7 +34,17 @@ public class HomeController extends AuthController {
     @RequestMapping({"/", "/home"})
     public String home(Model model,
                        @RequestParam("sort") Optional<String> sort,
-                       @RequestParam("p") Optional<Integer> page){
+                       @RequestParam("p") Optional<Integer> page,
+                       @RequestParam("keywords") Optional<String> kw,
+                       @RequestParam("minPrice") Optional<Integer> min,
+                       @RequestParam("maxPrice") Optional<Integer> max) {
+        String keywords = kw.orElse("");
+        if (kw.isPresent() && kw.get().trim().isEmpty()) {
+            return "redirect:/home";
+        }
+        if(kw.isPresent()){
+            session.set("keywords", kw);
+        }
         int currentPage = page.orElse(FIRST_PAGE_NUMBER);
         Pageable pageable;
         if (currentPage < FIRST_PAGE_NUMBER) {
@@ -44,7 +54,23 @@ public class HomeController extends AuthController {
         } else {
             pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE);
         }
+        if(min.isPresent() && max.isPresent()){
+            Page<Sanpham> pages = dao.findByPriceRange(min.get(), max.get(), pageable);
+            model.addAttribute("Sanpham", pages.getContent());
+            model.addAttribute("currentPage", pages.getNumber()); // Current page number
+            model.addAttribute("totalPages", pages.getTotalPages()); // Total pages
+            model.addAttribute("sort", sort.orElse("")); // Current sort order
+            return "index";
+        }
 
+        if(keywords != null && !keywords.isEmpty()){
+            Page<Sanpham> pages = dao.findByKeywords(keywords, pageable);
+            model.addAttribute("Sanpham", pages.getContent());
+            model.addAttribute("currentPage", pages.getNumber()); // Current page number
+            model.addAttribute("totalPages", pages.getTotalPages()); // Total pages
+            model.addAttribute("sort", sort.orElse("")); // Current sort order
+            return "index";
+        }
         if (sort.isPresent()) {
             if (sort.get().equals("asc")) {
                 pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("gia").ascending());

@@ -25,7 +25,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         User user = session.get("user");
         if (user != null) {
             // Đảm bảo user tồn tại trong database (trường hợp bị xóa)
-            request.setAttribute("user", userDAO.findById(user.getUsername()).orElse(null));
+            if(request.getAttribute("user") == null){
+                request.setAttribute("user", userDAO.findById(user.getUsername()).orElse(null));
+            }
         }
         return true; // Tiếp tục xử lý request
     }
@@ -34,10 +36,20 @@ public class AuthInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
             // Thêm currentUser vào model
-            Object currentUser = request.getAttribute("currentUser");
-            if (currentUser != null) {
-                modelAndView.addObject("user", currentUser);
+            if(!modelAndView.getModel().containsKey("user")){
+                Object currentUser = request.getAttribute("user");
+                if (currentUser != null) {
+                    modelAndView.addObject("user", currentUser);
+                }
             }
         }
+    }
+
+    public boolean isAdmin(User user){
+        return user != null && "ADMIN".equals(user.getRole());
+    }
+
+    public boolean isUser(User user){
+        return user != null && "USER".equals(user.getRole());
     }
 }

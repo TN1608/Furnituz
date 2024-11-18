@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@PreAuthorize("hasAnyRole('USER','ADMIN')")
 @RequestMapping("/product")
 public class ProductController extends AuthController {
     @Autowired
@@ -54,7 +53,7 @@ public class ProductController extends AuthController {
             pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE);
         }
         if (kw.isPresent()) {
-            Page<Sanpham> pages = dao.findByTensanpham(kw.get(), pageable);
+            Page<Sanpham> pages = dao.findByKeywords(kw.get(), pageable);
             model.addAttribute("products", pages);
             model.addAttribute("key", kw.get());
             return "danhsachsanpham";

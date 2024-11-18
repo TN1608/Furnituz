@@ -14,6 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/**") // Áp dụng cho tất cả các đường dẫn
-                .excludePathPatterns("/account/**", "/resources/**"); // Trừ login, signup
+                .excludePathPatterns("/home/**","/account/**", "/error/**","/static/**"); // Trừ login, signup=
     }
+
 }

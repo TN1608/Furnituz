@@ -48,4 +48,11 @@ public class User {
     @Column(name = "email_verified")
     private Boolean emailVerified;
 
+    public String getRole() {
+        return role != null && role ? "ADMIN" : "USER";
+    }
+
+    public void setRole(String role) {
+        this.role = "ADMIN".equals(role);
+    }
 }

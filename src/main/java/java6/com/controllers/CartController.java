@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-
 public class CartController extends AuthController {
     @Autowired
     SessionService session;
@@ -31,7 +30,6 @@ public class CartController extends AuthController {
     lsttDAO lsDAO;
     @Autowired
     VNPAYService vnPayService;
-    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @RequestMapping("/cart")
     public String cart(Model model){
         List<CartItem> cart = session.get("Cart");
@@ -99,6 +97,9 @@ public class CartController extends AuthController {
     public String submitOrder(@RequestParam("amount") int orderTotal,
                               @RequestParam("orderInfo") String orderInfo,
                               HttpServletRequest request) {
+        if(orderTotal <= 0) {
+            return "redirect:/cart";
+        }
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         String vnpayUrl = vnPayService.createOrder(request, orderTotal, orderInfo, baseUrl);
         return "redirect:" + vnpayUrl;

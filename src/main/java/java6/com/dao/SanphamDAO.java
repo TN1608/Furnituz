@@ -10,7 +10,7 @@ public interface SanphamDAO extends JpaRepository<Sanpham, String> {
     @Query("Select s from Sanpham s where s.madanhmuc.madm = ?1")
     public Page<Sanpham> findByDanhmuc(String danhmuc, Pageable pageable);
     @Query("select s from Sanpham s where s.tensp like %?1%")
-    public Page<Sanpham> findByTensanpham(String tensanpham,Pageable pageable);
+    public Page<Sanpham> findByKeywords(String keyword,Pageable pageable);
     @Query("select s from Sanpham s where s.gia between ?1 and ?2")
     public Page<Sanpham> findByPriceRange(double min, double max,Pageable pageable);
 }

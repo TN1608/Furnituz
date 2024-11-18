@@ -35,22 +35,70 @@
         </button>
     </div>
     <div class="container-fluid p-5">
-        <h4 class="text-center">Danh mục sản phẩm đang hot</h4>
+        <h4 class="text-center" th:text="#{home.hotProducts}"></h4>
         <hr class="w-100">
-        <div class="d-flex justify-content-end align-items-center mb-2">
-            <div class="container dropdown text-end">
-                <button class="btn dropdown-toggle softbtn" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                    Sắp xếp sản phẩm
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" th:href="@{/home(sort='desc')}">Giá : Cao > Thấp</a></li>
-                    <li><a class="dropdown-item" th:href="@{/home(sort='asc')}">Giá : Thấp > Cao</a></li>
-                    <li><a class="dropdown-item" href="#">Mới nhất</a></li>
-                </ul>
+        <div class="justify-content-end d-flex option mb-2 me-5">
+            <button class="btn btn-option" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i
+                    class="bi bi-sliders2 me-2"></i><span th:text="#{home.filter}"></span></button>
+
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                 aria-labelledby="offcanvasWithBothOptionsLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"><span th:text="#{home.filter.title}"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>
+                        <a th:href="@{/home}" class="btn btn-outline-danger w-100" th:text="#{home.filter.delete}"></a>
+<!--SearhBAr-->
+                    <form th:action="@{/home}" class="w-100" method="get">
+                        <label class="form-label" th:text="#{home.filter.search}"></label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" th:placeholder="#{home.filter.search.placeholder}" name="keywords">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2" th:text="#{home.filter.search}"></button>
+                        </div>
+                    </form>
+<!--Sort-->
+                    <form class="sortPice w-100 mb-3" th:action="@{/home}" method="get">
+                        <div class="form-group">
+                            <label class="form-label" th:text="#{home.filter.price}">Chọn giá</label>
+                            <div class="d-flex align-items-center">
+                                <input type="number" class="form-control mx-2" id="minPrice" name="minPrice"
+                                       th:placeholder="#{home.filter.price.high}" value="minPrice">
+                                <input type="number" class="form-control mx-2" id="maxPrice" name="maxPrice"
+                                       th:placeholder="#{home.filter.price.low}" value="maxPrice">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary mt-3" type="submit" th:text="#{home.filter.price.submit}"></button>
+                    </form>
+<!--                    Sort Desc ASC-->
+                    <div class="container text-end">
+                        <div class="dropdown filter-dropdown">
+                            <button class="btn dropdown-toggle filter-btn" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false" th:text="#{home.filter.price.sort}"></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/home(sort='desc')}">
+                                        <i class="bi bi-sort-down-alt"></i><span th:text="#{home.filter.price.hightolow}"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/home(sort='asc')}">
+                                        <i class="bi bi-sort-up-alt"></i><span th:text="#{home.filter.price.lowtohigh}"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="bi bi-star-fill"></i><span th:text="#{home.filter.price.newest}"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </p>
+                </div>
             </div>
-            <input class="form-control w-25" type="search" placeholder="Tìm kiếm sản phẩm"
-                   aria-label="Search">
         </div>
         <div class="container products">
             <div class="row">
