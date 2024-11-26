@@ -13,7 +13,7 @@
             <ul class="dropdown-menu" style="">
                 <li><a class="dropdown-item" th:href="@{|/product/danh-sach-san-pham/${danhmuc}?sort=desc|}">Giá : Cao &gt; Thấp</a></li>
                 <li><a class="dropdown-item" th:href="@{|/product/danh-sach-san-pham/${danhmuc}?sort=asc|}">Giá : Thấp &gt; Cao</a></li>
-                <li><a class="dropdown-item" href="#">Mới nhất</a></li>
+                <li><a class="dropdown-item" th:href="@{|/product/danh-sach-san-pham/${danhmuc}?sort=newest|}">Mới nhất</a></li>
             </ul>
         </div>
 

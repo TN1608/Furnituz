@@ -1,14 +1,8 @@
 package java6.com.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
 
@@ -16,29 +10,27 @@ import org.hibernate.annotations.Nationalized;
 @Setter
 @Entity
 @Table(name = "users")
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
     @Id
     @Size(max = 250)
     @Nationalized
     @Column(name = "username", nullable = false, length = 250)
-    @NotBlank(message = "{valid.username}")
     private String username;
 
     @Nationalized
+    @Lob
     @Column(name = "password")
-    @NotBlank(message = "{valid.password}")
     private String password;
 
     @Size(max = 50)
     @Nationalized
     @Column(name = "gmail", length = 50)
-    @NotBlank(message = "{valid.gmail}")
     private String gmail;
 
-    @Column(name = "role")
-    private Boolean role;
+    @Size(max = 20)
+    @Nationalized
+    @Column(name = "role", length = 20)
+    private String role;
 
     @Size(max = 500)
     @Nationalized
@@ -48,11 +40,4 @@ public class User {
     @Column(name = "email_verified")
     private Boolean emailVerified;
 
-    public String getRole() {
-        return role != null && role ? "ADMIN" : "USER";
-    }
-
-    public void setRole(String role) {
-        this.role = "ADMIN".equals(role);
-    }
 }

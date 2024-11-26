@@ -11,7 +11,7 @@
             <img th:src="@{/images/banner/login.jpg}" alt="login" class="img-fluid">
         </div>
         <div class="col-md-6">
-            <form th:action="@{/account/login}" th:object="${user}" method="post">
+            <form th:action="@{/account/login/form}" th:object="${user}" method="post">
                 <div class="mb-3">
                     <label for="username" class="form-label">Tên đăng nhập</label>
                     <input type="text" class="form-control" id="username" name="username"/>
@@ -29,6 +29,10 @@
                 <br>
                 <span><a th:href="@{/account/forgot-password}" class="text-decoration-none text-black">Quên mật khẩu?</a></span>
                 <p>Chưa có tài khoản?<a th:href="@{/account/signup}" class="btn btn-success">Đăng ký</a></p>
+                <div class="d-flex justify-content-center align-items-center"><span class="fw-bold me-2">Đăng nhập với</span>
+                    <a th:href="@{/account/login/authorize/google}" class="btn auth-btn me-2"><i class="fa-brands fa-google me-2 text-danger"></i>GOOGLE</a>
+                    <a th:href="@{/account/login/authorize/facebook}" class="btn auth-btn"><i class="fa-brands fa-facebook me-2 text-primary"></i>FACEBOOK</a>
+                </div>
             </form>
         </div>
     </div>

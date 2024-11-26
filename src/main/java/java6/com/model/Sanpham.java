@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Nationalized;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @Entity
@@ -40,5 +42,8 @@ public class Sanpham {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "madanhmuc")
     private Danhmuc madanhmuc;
+
+    @Column(name = "ngaytao")
+    private LocalDate ngaytao;
 
 }

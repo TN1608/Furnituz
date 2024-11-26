@@ -13,4 +13,7 @@ public class SanphamService {
     public Sanpham findById(String id){
         return dao.findById(id).orElse(null);
     }
+//    public Sanpham sortByDate(Date ngaytao){
+//        return dao.sortByDate(ngaytao);
+//    }
 }

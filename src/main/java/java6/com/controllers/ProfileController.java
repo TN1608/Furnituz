@@ -2,7 +2,6 @@ package java6.com.controllers;
 
 import java6.com.dao.UserDAO;
 import java6.com.dao.lsttDAO;
-import java6.com.model.Lichsuthanhtoan;
 import java6.com.model.User;
 import java6.com.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;

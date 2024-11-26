@@ -3,7 +3,6 @@ package java6.com.controllers;
 import java6.com.dao.SanphamDAO;
 import java6.com.dao.UserDAO;
 import java6.com.model.Sanpham;
-import java6.com.model.User;
 import java6.com.services.SessionService;
 import java6.com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,12 +77,16 @@ public class HomeController extends AuthController {
             } else if (sort.get().equals("desc")) {
                 pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("gia").descending());
             }
+            if(sort.get().equals("newest")){
+                pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("ngaytao").descending());
+            }
         }
         Page<Sanpham> pages = dao.findAll(pageable);
         model.addAttribute("Sanpham", pages.getContent());
         model.addAttribute("currentPage", pages.getNumber()); // Current page number
         model.addAttribute("totalPages", pages.getTotalPages()); // Total pages
         model.addAttribute("sort", sort.orElse("")); // Current sort order
+
         return "index";
     }
 }

@@ -1,27 +1,28 @@
 package java6.com.controllers;
 
 import jakarta.validation.Valid;
-import java6.com.config.AuthInterceptor;
 import java6.com.dao.UserDAO;
 import java6.com.model.User;
 import java6.com.services.CookieService;
 import java6.com.services.SessionService;
+import java6.com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @Controller
 @RequestMapping("/account")
-public class LoginController {
+public class LoginController extends AuthController {
     @Autowired
     SessionService session;
     @Autowired
@@ -30,13 +31,20 @@ public class LoginController {
     UserDAO dao;
     @Autowired
     PasswordEncoder pe;
+    @Autowired
+    UserService uservice;
 
     @RequestMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+    @PostMapping("/login/form")
     public String login(Model model,
                         @RequestParam(value = "remember",defaultValue = "false") boolean remember,
                         @RequestParam(value = "username", defaultValue = "") String username,
-                        @RequestParam(value = "password", defaultValue = "") String password) {
-        User user= dao.findById(username).orElse(null);
+                        @RequestParam(value = "password", defaultValue = "") String password) throws Exception {
+        uservice.loadByUsername(username);
+        User user = dao.findById(username).orElse(null);
         if(username.isEmpty() || password.isEmpty()){
             model.addAttribute("message","Mật khẩu hoặc tài khoản không đúng");
             return "login";
@@ -57,9 +65,6 @@ public class LoginController {
         }else{
             cookie.remove("user");
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Authenticated User: " + auth.getName());
-        System.out.println("LOGGED IN : "+user.getRole());
         model.addAttribute("user",user);
         return "redirect:/home";
     }
@@ -71,7 +76,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "signup";
         }
-        if (!user.getPassword().equals(ConfirmPassword)) {
+        if (!ConfirmPassword.equals(user.getPassword())) {
             model.addAttribute("PError", "Passwords do not match");
             return "signup";
         }
@@ -89,11 +94,27 @@ public class LoginController {
         model.addAttribute("user", user);
         return "redirect:/account/login";
     }
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(Model model){
         session.remove("user");
         cookie.remove("user");
         model.addAttribute("user",null);
+        return "redirect:/home";
+    }
+    @GetMapping("/login/success")
+    public String loginSuccess(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<User> user = dao.findById(auth.getName());
+        if(user.isPresent()){
+            session.set("user",user.get());
+        }
+        System.out.println("NAME :" + auth.getName() + "\n" + "AUTH : " + auth.getAuthorities() + "\n" + "PRINCIPAL : " + auth.getPrincipal());
+        model.addAttribute("user",user);
+        return "redirect:/home";
+    }
+    @GetMapping("/login/auth/success")
+    public String loginAuthSuccess(OAuth2AuthenticationToken auth){
+        uservice.loginfromOAuth2(auth);
         return "redirect:/home";
     }
 }

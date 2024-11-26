@@ -1,7 +1,6 @@
 package java6.com.controllers;
 
 import java6.com.dao.SanphamDAO;
-import java6.com.model.CartItem;
 import java6.com.model.Sanpham;
 import java6.com.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -63,6 +59,8 @@ public class ProductController extends AuthController {
                 pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("gia").ascending());
             } else if (sort.get().equals("desc")) {
                 pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("gia").descending());
+            }else if(sort.get().equals("newest")){
+                pageable = PageRequest.of(currentPage, NUMBER_OF_ITEM_PER_PAGE, Sort.by("ngaytao").descending());
             }
         }
         Page<Sanpham> pages = dao.findByDanhmuc(danhmuc,pageable);

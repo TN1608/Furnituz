@@ -5,8 +5,60 @@
     <title>Title</title>
 </head>
 <body>
-  <div class="admin_header" th:fragment="Aheader">
+<div class="admin_header" th:fragment="Aheader">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <!-- Logo or Title -->
+            <a class="navbar-brand fw-bold text-primary" th:href="@{/admin/home}">
+                <i class="bi bi-house-door-fill"></i> Admin Dashboard
+            </a>
 
-  </div>
+            <!-- Toggle Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Back to User Home -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">
+                            <i class="bi bi-arrow-left"></i> Go Back to Home
+                        </a>
+                    </li>
+                    <!-- Back to Admin Home -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/home}">
+                            <i class="bi bi-speedometer2"></i> Admin Home
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Search Form -->
+                <form class="d-flex" th:action="@{/search}" method="get">
+                    <input class="form-control me-2" type="search" name="query" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </form>
+
+                <!-- Welcome Message -->
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i> Welcome, <span th:text="${user.username}"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
 </body>
 </html>
