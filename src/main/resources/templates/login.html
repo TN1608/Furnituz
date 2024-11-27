@@ -5,37 +5,55 @@
     <title>Title</title>
 </head>
 <body>
-<div class="container p-5" th:fragment="login">
-    <div class="row">
-        <div class="col-md-6 log-banner overflow-hidden">
-            <img th:src="@{/images/banner/login.jpg}" alt="login" class="img-fluid">
-        </div>
-        <div class="col-md-6">
-            <form th:action="@{/account/login/form}" th:object="${user}" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" name="username"/>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Mật khẩu</label>
-                    <input type="password" class="form-control" id="password" name="password"/>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember" th:value="true"/>
-                        <label class="form-check-label" for="rememberMe">Lưu đăng nhập</label>
+<div class="container-fluid p-5" th:fragment="login" style="background-color: #A6AEBF">
+    <div class="row align-items-center">
+        <div class="col-md-12">
+            <div class="login-form p-4 shadow rounded">
+                <h2 class="text-center mb-4">Đăng Nhập</h2>
+                <form th:action="@{/account/login/form}" th:object="${user}" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập">
                     </div>
-                </div>
-                <p class="text-danger" th:text="${message}"></p>
-                <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                <br>
-                <span><a th:href="@{/account/forgot-password}" class="text-decoration-none text-black">Quên mật khẩu?</a></span>
-                <p>Chưa có tài khoản?<a th:href="@{/account/signup}" class="btn btn-success">Đăng ký</a></p>
-                <div class="d-flex justify-content-center align-items-center"><span class="fw-bold me-2">Đăng nhập với</span>
-                    <a th:href="@{/account/login/authorize/google}" class="btn auth-btn me-2"><i class="fa-brands fa-google me-2 text-danger"></i>GOOGLE</a>
-                    <a th:href="@{/account/login/authorize/facebook}" class="btn auth-btn"><i class="fa-brands fa-facebook me-2 text-primary"></i>FACEBOOK</a>
-                </div>
-            </form>
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                        <i class="toggle-password fa-solid fa-eye position-absolute" id="togglePassword" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                        <div class="form-check mt-2">
+                            <input type="checkbox" class="form-check-input" id="rememberMe" name="remember" th:value="true">
+                            <label class="form-check-label" for="rememberMe">Lưu đăng nhập</label>
+                        </div>
+                    </div>
+                    <p class="text-danger" th:text="${message}"></p>
+                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    <div class="text-center mt-3">
+                        <a th:href="@{/account/forgot-password}" class="text-decoration-none">Quên mật khẩu?</a>
+                    </div>
+                    <p class="text-center mt-3">Chưa có tài khoản?
+                        <a th:href="@{/account/signup}" class="btn btn-success ms-2">Đăng ký</a>
+                    </p>
+                    <div class="d-flex justify-content-center align-items-center mt-4">
+                        <span class="fw-bold me-2">Đăng nhập với</span>
+                        <a th:href="@{/account/login/authorize/google}" class="btn auth-btn me-2">
+                            <i class="fa-brands fa-google me-2 text-danger"></i>GOOGLE
+                        </a>
+                        <a th:href="@{/account/login/authorize/facebook}" class="btn auth-btn">
+                            <i class="fa-brands fa-facebook me-2 text-primary"></i>FACEBOOK
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordField = document.getElementById('password');
+        const passwordType = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', passwordType);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 </html>

@@ -91,7 +91,7 @@
                                 <li class="dropdown-header">Dịch vụ trả phí</li>
                                 <li><a class="dropdown-item" th:href="@{/profile/lich-su-thanh-toan}"><span th:text="#{header.mn.paymentHistory}"></span></a></li>
                                 <li class="dropdown-header">Khác</li>
-                                <li><a class="dropdown-item" th:href="@{/user}"><span th:text="header.mn.profile"></span></a></li>
+                                <li><a class="dropdown-item" th:href="@{/user}"><span th:text="#{header.mn.profile}"></span></a></li>
                                 <li><a class="dropdown-item" th:href="@{/account/logout}"><span th:text="#{header.mn.logout}"></span></a></li>
                                 <li th:if="${user.role == 'ADMIN'}"><a class="dropdown-item" th:href="@{/admin/home}"><span th:text="#{header.mn.admin}"></span></a></li>
                             </ul>

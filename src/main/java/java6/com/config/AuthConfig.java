@@ -63,7 +63,7 @@ public class AuthConfig {
         http.oauth2Login(auth -> auth
                 .loginPage("/account/login/form")
                 .authorizationEndpoint(oa -> oa
-                        .baseUri("/account/login/authorization")
+                        .baseUri("/account/login/authorize")
                         .authorizationRequestRepository(getRepository())
                 )
                 .tokenEndpoint(te -> te

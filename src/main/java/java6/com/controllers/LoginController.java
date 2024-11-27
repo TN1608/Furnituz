@@ -1,9 +1,11 @@
 package java6.com.controllers;
 
+import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import java6.com.dao.UserDAO;
 import java6.com.model.User;
 import java6.com.services.CookieService;
+import java6.com.services.EmailSenderService;
 import java6.com.services.SessionService;
 import java6.com.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
+import java.util.Random;
 
 
 @Controller
@@ -33,6 +37,16 @@ public class LoginController extends AuthController {
     PasswordEncoder pe;
     @Autowired
     UserService uservice;
+    @Autowired
+    private EmailSenderService mailService;
+
+    String otp;
+
+    private String generateOTP() {
+        Random random = new Random();
+        int otp = 100000 + random.nextInt(900000);
+        return String.valueOf(otp);
+    }
 
     @RequestMapping("/login")
     public String loginPage(){
@@ -116,5 +130,79 @@ public class LoginController extends AuthController {
     public String loginAuthSuccess(OAuth2AuthenticationToken auth){
         uservice.loginfromOAuth2(auth);
         return "redirect:/home";
+    }
+    @GetMapping("/forgot-password")
+    public String forgotPassword(Model model){
+        model.addAttribute("showOtp",false);
+        model.addAttribute("showResetForm",false);
+        return "forgotPassword";
+    }
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam("email") String email,
+                                @RequestParam("password") String password,
+                                @RequestParam("confirmPassword") String cpassword,
+                                Model model){
+
+        model.addAttribute("email",session.get("email"));
+        User user = dao.findByGmail(email);
+        if(!password.equals(cpassword)){
+            model.addAttribute("message","Mật khẩu không khớp");
+            model.addAttribute("showOtp",false);
+            model.addAttribute("showResetForm",true);
+            return "forgotPassword";
+        }
+        if(pe.matches(password,user.getPassword())){
+            model.addAttribute("message","Mật khẩu mới không được trùng với mật khẩu cũ");
+            model.addAttribute("showOtp",false);
+            model.addAttribute("showResetForm",true);
+            return "forgotPassword";
+        }
+        user.setPassword(pe.encode(password));
+        dao.save(user);
+        model.addAttribute("message","Đổi mật khẩu thành công");
+        return "redirect:/account/login";
+    }
+    @PostMapping("/send-otp")
+    public String sendOTP(@RequestParam("email") String email,
+                          Model model,
+                          RedirectAttributes ra) throws MessagingException {
+        User user = dao.findByGmail(email);
+        if(user == null){
+            model.addAttribute("message","Email không tồn tại");
+            model.addAttribute("showOtp",false);
+            model.addAttribute("showResetForm",false);
+            return "forgotPassword";
+        }
+        //send otp
+        otp = generateOTP();
+        String emailContent = "<h2>Xác nhận email</h2>"
+                + "<p>Xin chào " + user.getUsername() + ",</p>"
+                + "<p>Vui lòng sử dụng mã xác nhận bên dưới để hoàn tất quên mật khẩu:</p>"
+                + "<h3 style='color:blue;'>" + otp + "</h3>"
+                + "<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>";
+
+        // Send email
+        mailService.sendEmail(email, otp + " là mã xác thực của bạn. ", emailContent);
+        model.addAttribute("message","Mã OTP đã được gửi đến email của bạn");
+        model.addAttribute("showOtp",true);
+        model.addAttribute("showResetForm",false);
+        session.set("email",email);
+        model.addAttribute("email",email);
+        return "forgotPassword";
+    }
+    @PostMapping("/verify-otp")
+    public String verifyOTP(@RequestParam("otp") String inputOTP,
+                            Model model,
+                            RedirectAttributes ra){
+        model.addAttribute("email",session.get("email"));
+        if(inputOTP.equals(otp)){
+            model.addAttribute("showResetForm",true);
+            model.addAttribute("showOtp",false);
+            return "forgotPassword";
+        }
+        model.addAttribute("message","Mã OTP không đúng");
+        model.addAttribute("showOtp",true);
+        model.addAttribute("showResetForm",false);
+        return "forgotPassword";
     }
 }

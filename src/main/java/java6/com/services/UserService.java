@@ -36,13 +36,14 @@ public class UserService {
                 .build();
     }
     public void loginfromOAuth2(OAuth2AuthenticationToken oauth){
-//        String username = oauth.getPrincipal().getAttribute("name");
+        String username = oauth.getPrincipal().getAttribute("name");
         String email = oauth.getPrincipal().getAttribute("email");
-        String password = Long.toHexString(System.currentTimeMillis());
+        String password = oauth.getPrincipal().getAttribute("password");
         User user = dao.findById(email).orElseGet(() -> {
             User newUser = new User();
-            newUser.setUsername(email);
-            newUser.setPassword(pe.encode("defaultPassword")); // Mật khẩu mặc định
+            newUser.setUsername(username);
+            newUser.setGmail(email);
+            newUser.setPassword(pe.encode(username+"@123"));
             newUser.setRole("USER");
             dao.save(newUser);
             return newUser;

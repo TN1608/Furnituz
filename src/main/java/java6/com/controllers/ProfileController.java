@@ -23,7 +23,8 @@ public class ProfileController extends AuthController {
     public String lichSuThanhToan(Model model) {
         User user = session.get("user");
         if(user != null ){
-            model.addAttribute("user",udao.findById(user.getUsername()).orElse(null));
+            User u = udao.findById(user.getUsername()).orElse(null);
+            model.addAttribute("user",u);
             model.addAttribute("lstt", lsdao.findAll());
             model.addAttribute("trangthai","Đã thanh toán");
             return "profile/lichsuthanhtoan";
