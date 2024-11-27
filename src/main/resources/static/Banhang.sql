@@ -37,20 +37,6 @@ create table lichsuthanhtoan(
 insert into users
 VALUES
 ('tuan','123',N'Nguyễn Đình Tuấn','tuanndps36835@fpt.edu.vn',0)
-insert into Orders 
-VALUES
-('001','Võ Tiến Thanh','18-07-2024',N'382/4/1 TX14'),
-('002','Đinh Tiền Hải','15-07-2024',N'1A Sô Viết Nghệ tĩnh '),
-('003','Vũ Văn Thư','09-07-2024',N'115 Cánh Mạng Tháng Tám '),
-('004','Nguyễn Việt Dũng','12-07-2024',N'305/2 TL12'),
-('005','Nguyễn Hải Yến Nhi','10-07-2024',N'15 Lý Tự Trọng');
-insert into Orderdetail 
-VALUES
-('001','ghế bar ENNA',N'src/main/webapp/img/chair/ENNA.jpg',6490000,6),
-('002','bàn ăn LUCERA',N'https://haydecor.com/wp-content/uploads/2024/07/ban-an-LUCERA-26.jpg',13590000,1),
-('003','Tủ ANNIE',N'https://haydecor.com/wp-content/uploads/2024/07/tu-ANNIA-5.jpg',13290000,4),
-('004','bàn ăn LEONA',N'https://haydecor.com/wp-content/uploads/2024/07/ban-an-LEONA-13.jpg',15590000,1),
-('005','sofa MIA',N'https://haydecor.com/wp-content/uploads/2024/06/sofa-MIA-3.jpg',24790000,3);
 
 select * from sanpham
 insert into sanpham(masp, tensp, anhsp,mota ,gia, trangthai, madanhmuc)

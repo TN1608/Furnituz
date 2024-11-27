@@ -6,7 +6,23 @@
 </head>
 <body>
     <div class="container p-5">
-
+        <h2 class="text-center">Đổi mật khẩu</h2>
+        <form th:action="@{/account/change-password}" method="post">
+            <div class="mb-3">
+                <label for="oldPassword" class="form-label">Mật khẩu cũ</label>
+                <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Nhập mật khẩu cũ">
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới">
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu mới">
+            </div>
+            <p class="text-danger" th:text="${message}"></p>
+            <button type="submit" class="btn btn-primary w-100">Đổi mật khẩu</button>
+        </form>
     </div>
 </body>
 </html>

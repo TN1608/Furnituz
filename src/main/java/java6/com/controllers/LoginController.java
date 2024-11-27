@@ -111,7 +111,7 @@ public class LoginController extends AuthController {
     @GetMapping("/logout")
     public String logout(Model model){
         session.remove("user");
-        cookie.remove("user");
+//        cookie.remove("user");
         model.addAttribute("user",null);
         return "redirect:/home";
     }

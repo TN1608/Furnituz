@@ -31,4 +31,9 @@ public class ProfileController extends AuthController {
         }
         return "redirect:/home";
     }
+    @RequestMapping("/")
+    public String profile(Model model) {
+
+        return "redirect:profile/trangcanhan";
+    }
 }

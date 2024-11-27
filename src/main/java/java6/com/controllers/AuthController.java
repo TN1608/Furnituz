@@ -2,6 +2,7 @@ package java6.com.controllers;
 
 import java6.com.dao.UserDAO;
 import java6.com.model.User;
+import java6.com.services.CookieService;
 import java6.com.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public abstract class AuthController {
     @Autowired
     SessionService session;
+    @Autowired
+    CookieService cookie;
     @Autowired
     UserDAO dao;
 

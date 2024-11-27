@@ -44,7 +44,6 @@ public class AuthConfig {
         //Cau hinh bao mat
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/product/**").authenticated()
                         .requestMatchers("/**", "/error/**", "/account/").permitAll()
                 )
                 .formLogin(form -> form

@@ -39,9 +39,6 @@
             <a type="button" class="add-cart-btn" th:href="@{/product/addtocart(id=${product.masp})}">
               <i class="fas fa-shopping-cart"></i>Thêm Vào Giỏ Hàng
             </a>
-            <a type="button" class="buy-now-btn">
-              <i class="fas fa-wallet"></i>Mua Ngay
-            </a>
           </div>
         </div>
       </div>
@@ -97,7 +94,7 @@
             tối ưu đầy đủ các yếu tố thẩm mỹ – công năng – linh hoạt trong
             nhiều diện tích mà bạn có thể cân nhắc lựa chọn.</p>
         </div>
-        <h1>Ghế ăn CINDY - Lựa chọn linh hoạt cho không gian tối giản</h1>
+        <h1 th:text="${product.tensp} + ' - Lựa chọn linh hoạt cho không gian tối giản'"></h1>
 
         <div class="img-description">
           <div th:each="detail, count : ${productDetails}" th:if="${count < 3}">
