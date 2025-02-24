@@ -13,11 +13,11 @@
                 <form th:action="@{/account/login/form}" th:object="${user}" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập">
+                        <input type="text" class="form-control" id="username" name="username" th:name="username" placeholder="Nhập tên đăng nhập">
                     </div>
                     <div class="mb-3 position-relative">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu">
+                        <input type="password" class="form-control" id="password" name="password" th:name="password" placeholder="Nhập mật khẩu">
                         <i class="toggle-password fa-solid fa-eye position-absolute" id="togglePassword" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
                         <div class="form-check mt-2">
                             <input type="checkbox" class="form-check-input" id="rememberMe" name="remember" th:value="true">

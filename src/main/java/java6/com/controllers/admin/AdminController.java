@@ -2,6 +2,7 @@ package java6.com.controllers.admin;
 
 import java6.com.controllers.AuthController;
 import java6.com.dao.UserDAO;
+import java6.com.model.User;
 import java6.com.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,7 @@ public class AdminController extends AuthController {
 
     @RequestMapping("/home")
     public String AdminHome(Model model){
-        model.addAttribute("message","Hello Admin");
+        model.addAttribute("user", session.get("user"));
         return "admin/index";
     }
 }

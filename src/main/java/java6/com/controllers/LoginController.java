@@ -57,13 +57,17 @@ public class LoginController extends AuthController {
                         @RequestParam(value = "remember",defaultValue = "false") boolean remember,
                         @RequestParam(value = "username", defaultValue = "") String username,
                         @RequestParam(value = "password", defaultValue = "") String password) throws Exception {
-        uservice.loadByUsername(username);
+//        uservice.loadByUsername(username);
         User user = dao.findById(username).orElse(null);
         if(username.isEmpty() || password.isEmpty()){
             model.addAttribute("message","Mật khẩu hoặc tài khoản không đúng");
             return "login";
         }
-
+        if(!username.equals(user.getUsername())){
+            model.addAttribute("message","Tài khoản không đúng");
+            System.out.println("TAI KHOAN SAI");
+            return "login";
+        }
         //check encode pass
         if(user == null){
             model.addAttribute("message","Tài khoản không tồn tại");
@@ -71,6 +75,7 @@ public class LoginController extends AuthController {
         }
         if(!pe.matches(password,user.getPassword())){
             model.addAttribute("message","Mật khẩu sai!");
+            System.out.println("MAT KHAU SAI");
             return "login";
         }
         session.set("user",user);
@@ -130,6 +135,10 @@ public class LoginController extends AuthController {
     public String loginAuthSuccess(OAuth2AuthenticationToken auth){
         uservice.loginfromOAuth2(auth);
         return "redirect:/home";
+    }
+    @GetMapping("/login/form")
+    public String turnBack(){
+        return "redirect:/account/login";
     }
     @GetMapping("/forgot-password")
     public String forgotPassword(Model model){
